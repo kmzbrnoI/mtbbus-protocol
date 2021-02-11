@@ -10,7 +10,9 @@ Požadavky na nový MTB protokol
   - MTB-SPAX
   - MTB-přejezd
   - MTB-POT nový: pozor: velký rozsah ADC, nemůže posílat `changed`.
-  - MTB-RACILCOM
+  - MTB-RAILCOM
+* Vice bezdrátové komunikace?
+  - Retranslační jednotka
 * Zrušení podpory:
   - MTB-REG
 
@@ -33,6 +35,8 @@ Požadavky na nový MTB protokol
         - Asi jo: čtení verze FW apod.
 * Desky si mohou pamatovat konfiguraci: např. S-COM výstupy, aby je po startu
   resetovaly, rychlost sběrnice.
+* Na začátku zprávy musí být délka nezávisle na typu zprávy, aby MTB-USB
+  modul mohl parsovat zprávy bez znalosti typů.
 
 ## Univerzálnost
 
@@ -45,6 +49,14 @@ Požadavky na nový MTB protokol
   ADC moduly, kde se hdonota vstupů mění každou chvíli. Čtení stavu takových
   modulů bude pravděpodobně metodou "polling", nikoliv "event".
 
+## Protokol
+
+ * 0. byte: adresa
+ * 1. byte: délka
+ * 2. byte: typ
+ * 3.–n. byte: data
+ * n+1. byte: XOR
+
 ## Příkazy MTBbus
 
 ### master → slave
@@ -53,17 +65,28 @@ Požadavky na nový MTB protokol
    - Lze si říct, jestli chci vždy jen IDLE nebo i info o změně stavu.
      Užití: např. v RailCom modulu.
    - Tohle musí být konfigurace MTB-USB desky.
+   - Musí obsahovat bit, jestli poslední zpráva došla v pořádku.
  * `INFO` – žádost o zaslání informací o modulu
+    - Odpověď: `INFO`
  * `SET_CONFIG` – sémantika specifická pro konkrétní modul
+    - Odpověď: `ACK`
  * `GET_CONFIG`
+    - Odpověď: `ACK`
  * `BEACON_ON`
+    - Odpověď: `ACK`
  * `BEACON_OFF`
+    - Odpověď: `ACK`
  * `GET_INPUT` – sémantika specifická pro konkrétní modul
+    - Odpověď: `INPUT`
  * `SET_OUTPUT` – sémantika specifická pro konkrétní modul
     - Zahrnuje kmitání, nastavení návěstí, ...
+    - Odpověď: `ACK`
  * [GENERAL] `SPEED_CHANGED`
  * [GENERAL] `RESET_OUTPUTS` – požadavek na resetování stavu výstupů do výchozího
    stavu.
+ * `CHANGE_ADDRESS` – změň adresu na zadanou; lze i jako broadcast a pak
+   se změní jen u modulů se zmáčknutým tlačítkem
+    - Odpověď: `ACK`
 
 ### slave → master
 
@@ -75,6 +98,7 @@ Požadavky na nový MTB protokol
  * `INPUT` – obsahuje stav vstupů
     - pozor: má být záměrně různé od `INPUT_CHANGED`, využito např. pro ADC
  * `CONFIG` – pošle konfiguraci, odpověď na `GET_CONFIG`
+ * `ACK`
 
 ### `INFODATA`
 
@@ -87,6 +111,8 @@ Požadavky na nový MTB protokol
    - Aktuální seznam aktivních modulů.
    - Jestli má získávat stav všech vstupních modulů nebo si jen nechat posílat
      IDLE.
+ * Pozor: neskenovat sběrnici moc rychle, aby se moduly moc nezabývaly jen
+   stavem sběrnice.
 
 ### Scénáře
 
@@ -98,12 +124,13 @@ Požadavky na nový MTB protokol
 ### MTB-UNI
 
  * Konfigurace:
-   - Typ výstupů: TODO má smysl i něco jiného než S-COM?
-   - Zpoždění vstupů: TODO pro každý vstup? najednou?
-   - TODO něco dalšího?
-   - Posílá se vždy celá.
+   - 16 bytů: typ výstupů + bezpečný stav
+   - 8 bytů: 16×4 bity: zpoždění vstupů per vstup po 0.1 s
  * Stav vstupů se vždy posílá celý (2 bytes)
- * Stav výstupů TODO (S-COM kódy 7 bit; kmitání)
+ * Stav výstupů: 1 byte:
+     a. S-COM 0b 1xxx xxxx
+     b. úroveň: 0b 0000 000x
+     c. kmitání: 0b 0100 xxxx
 
 ### MTB-SPAX
 
@@ -116,9 +143,10 @@ Požadavky na nový MTB protokol
    - A: teplota chladiče (8 bit)
  * Výstupy:
    - D: generování DCC zapnuto (lze vypnout jeden SPAX!)
+ * Konfigurace:
    - A: napětí na výstupu (8 bit?)
    - A: maximální proud
- * Konfigurace: asi nic? TODO
+   - Zapnout/vypnout railcom?
  * Stav vstupů: vše se posílá rovnou, volat `CHANGED` jen při změně digitálních
    vstupů nebo změně o > 20 % nebo uplynutí 500 ms (a změně). Jde o to, aby se
    sběrnice zbytečně nezatěžovala.
@@ -126,17 +154,13 @@ Požadavky na nový MTB protokol
  * Modul si ukládá celý stav výstupů a po zapnutí ho obnoví.
  * Příkaz resetu sběrnice neresetuje výstupy modulu.
 
-### MTB-POT
-
- * 8 8bit vstupů.
- * Stav vstupů se může posílat najednou.
- * Výstupy: žádné.
-
 ### MTB-ZDROJ
 
- * 4 8bit vstupy proudy, 4 8bit vstupy teploty.
+ * 4 8bit vstupy proudy, 4 8bit vstupy teploty, 4 8bit vstupy napětí.
  * Stav vstupů se může posílat najednou.
- * TODO nějaké další vstupy a výstupy?
+ * Výstupy: zapnout/vypnout.
+ * Konfigurace:
+   - rychlost kmitače?
 
 ### MTB-přejezd
 
@@ -152,7 +176,7 @@ Požadavky na nový MTB protokol
  * Konfigurace:
    - kolik kolejí brát v potaz (lze i 0 jen pro čtení detektoru)
    - blokovat pozitivu
-   - Zpoždění vstupů detektoru? Ano, může ho brát v potaz i samotný přejezd.
+   - zpoždění vstupů 4 bity / vstup
  * Stav vstupů posílat najednou.
  * Stav výstupů posílat najednou.
 
@@ -170,8 +194,17 @@ Požadavky na nový MTB protokol
  * Musí mít relativně velké prodlevy při ztrátě adres na vstupech.
  * Při změně posílá jen změněné adresy.
 
+## MTB-DISPLAY
+
+ * Např. display v pultu
+ * Pult: bezdrátový modul?
+
 ## TODO
 
  * Má smysl mít nějaký výchozí stav výstupů jiný než 0?
    - Ano, SPAXy.
    - Co další typy modulů?
+ * Remote programming, podpora v řídícím SW https://github.com/jgillick/avr-multidrop-bootloader
+ * Baudrate autodetect
+ * MQTT
+ * Jak psát dokumentaci: sfinx
