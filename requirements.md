@@ -65,7 +65,8 @@ Požadavky na nový MTB protokol
    - Lze si říct, jestli chci vždy jen IDLE nebo i info o změně stavu.
      Užití: např. v RailCom modulu.
    - Tohle musí být konfigurace MTB-USB desky.
-   - Musí obsahovat bit, jestli poslední zpráva došla v pořádku.
+   - Musí obsahovat bit, jestli při poslední žádosti dostala master deska
+     od modulu non-idle odpověď.
  * `INFO` – žádost o zaslání informací o modulu
     - Odpověď: `INFO`
  * `SET_CONFIG` – sémantika specifická pro konkrétní modul
@@ -87,6 +88,8 @@ Požadavky na nový MTB protokol
  * `CHANGE_ADDRESS` – změň adresu na zadanou; lze i jako broadcast a pak
    se změní jen u modulů se zmáčknutým tlačítkem
     - Odpověď: `ACK`
+ * `REPROG` – restartuj se a připrav se na nahrání nového FW
+    - Odpověď: již speciální odpověď protokolu pro nahrávání firmwaru
 
 ### slave → master
 
