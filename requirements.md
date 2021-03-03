@@ -154,6 +154,7 @@ Požadavky na nový MTB protokol
 ## TODO
 
  * Popsat typický chod sběrnice
+   - Firmware Upgrade Procedure
  * Popsat příkazy pro moduly:
    - Set Configuration
  * Má smysl mít nějaký výchozí stav výstupů jiný než 0?

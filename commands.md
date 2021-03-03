@@ -110,47 +110,80 @@ MTBbus commands
 * Standard abbreviation: `RESET_OUTPUTS`.
 * N.o. data bytes: 0.
 * Response: [*ACK*](#miso-ack).
+  - When command is sent as broadcast, no response should be sent.
 
 ### `0x20` Change Address <a name="mosi-change-address"></a>
 
- * `CHANGE_ADDRESS` – změň adresu na zadanou; lze i jako broadcast a pak
-   se změní jen u modulů se zmáčknutým tlačítkem
-    - Odpověď: `ACK`
+* Change module address.
+  - This feature is implemented only by modules, which address is not determined
+    by hadrware.
+  - When module does not support this feature, it should respond
+    [*Error*](#miso-error) *Unsupported command*.
+* Command type: for specific module or broadcast.
+  - When this command is sent as broadcast, only modules which were activated
+    by on-board button press should change address.
+* Command Code byte: `0x20`.
+* N.o. data bytes: 1.
+* Standard abbreviation: `CHANGE_ADDR`.
+* Data byte 0: new module address.
+* Response: [*ACK*](#miso-ack) or [*Error*](#miso-error) *Unsupported command*.
+  - When command is sent as broadcast, no response should be sent.
 
-### `0xE0` Speed Changed <a name="mosi-speed-changed"></a>
+### `0xE0` Change Speed <a name="mosi-speed-changed"></a>
 
- * [GENERAL] `SPEED_CHANGED`
+* Bus speed change announcement.
+  - When this command is received, slave module must immediately change bus
+    speed to bus speed specified in the command. Module must store new speed
+    in it's permanent memory and use it from now on even after reset or cutoff.
+  - This packet is usually sent multiple times by master module to assure all
+    modules really change their speed.
+* Command type: broadcast only.
+* Command Code byte: `0xE0`.
+* N.o. data bytes: 1.
+* Standard abbreviation: `CHANGE_SPEED`.
+* Response: no response.
 
-### `0xF0` Reprogramming <a name="mosi-reprog"></a>
+### `0xF0` Firmware Upgrade Request <a name="mosi-reprog"></a>
 
- * `REPROG` – restartuj se a připrav se na nahrání nového FW
-    - Odpověď: již speciální odpověď protokolu pro nahrávání firmwaru
+* This command instructs slave module to restart into bootloader and wait
+  for firmware upgrade.
+* Command type: for specific module only.
+* Command Code byte: `0xF0`.
+* N.o. data bytes: 0.
+* Standard abbreviation: `FWUPGD_REQUEST`.
+* Response: no response.
 
 
 ## Slave → Master
 
 ### `0x01` Acknowledgement <a name="miso-ack"></a>
 
-### `0x02` Module information <a name="miso-module-info"></a>
+### `0x02` Error <a name="miso-error"></a>
+
+* Error codes:
+  - `0x01` Unknown command.
+  - `0x02` Unsupported command.
+
+### `0x03` Module information <a name="miso-module-info"></a>
 
  * `INFO` `INFODATA`
  * 1 byte: typ modulu
  * 1 byte: verze FW modulu (MAJ MAJ MAJ MAJ MIN MIN MIN MIN)
 
-### `0x03` Output Set <a name="miso-output-set"></a>
+### `0x04` Output Set <a name="miso-output-set"></a>
 
  * `OUT_SET` – výstup nastaven, pošle aktuální stav výstupů
 
-### `0x04` Input Changed <a name="miso-input-changed"></a>
+### `0x05` Input Changed <a name="miso-input-changed"></a>
 
  * `INPUT_CHANGED` – následující data jsou specifická pro konkrétní moduly
     (obsahuje např. stav všech vstupů)
 
-### `0x05` Input State <a name="miso-input-state"></a>
+### `0x06` Input State <a name="miso-input-state"></a>
 
  * `INPUT` – obsahuje stav vstupů
     - pozor: má být záměrně různé od `INPUT_CHANGED`, využito např. pro ADC
 
-### `0x06` Configuration <a name="miso-config"></a>
+### `0x07` Configuration <a name="miso-config"></a>
 
  * `CONFIG` – pošle konfiguraci, odpověď na `GET_CONFIG`
