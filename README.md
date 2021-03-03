@@ -2,7 +2,9 @@ MTBbus Protocol Specification
 =============================
 
 ---
+
 **Content of this repository is under construction.**
+
 ---
 
 MTBbus is RS485-based communication bus for controlling general-purpose IO
