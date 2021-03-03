@@ -33,7 +33,7 @@ MTBbus commands
 * N.o. data bytes: 0.
 * Response: [*Module information*](#miso-module-info)
 
-### `0x03` Set Configuration {#mosi-set-config}
+### `0x03` Set Configuration <a name="mosi-set-config"></a>
 
 * This command instructs slave module to permanently set it's configuration.
   - The configuration should persist even if module turns off.
@@ -46,7 +46,7 @@ MTBbus commands
 * Data bytes are specific for specific module types.
 * Response: [*ACK*](#miso-ack).
 
-### `0x04` Get Configuration {#mosi-get-config}
+### `0x04` Get Configuration <a name="mosi-get-config"></a>
 
 * This command instructs slave module to send its current configuration to
   master board.
@@ -56,7 +56,7 @@ MTBbus commands
 * Data bytes are specific for specific module types.
 * Response: [*Configuration*](#miso-config).
 
-### `0x05` Beacon {#mosi-beacon}
+### `0x05` Beacon <a name="mosi-beacon"></a>
 
 * Turn module beacon on/off.
   - Each slave module should have special blue LED installed for beacon purpose.
@@ -71,7 +71,7 @@ MTBbus commands
   - `B`: 1 iff beacon should be on.
 * Response: [*ACK*](#miso-ack).
 
-### `0x10` Get Input {#mosi-get-input}
+### `0x10` Get Input <a name="mosi-get-input"></a>
 
 * In response to this command slave module should send state of its inputs.
 * Command Code byte: `0x10`.
@@ -82,7 +82,7 @@ MTBbus commands
     may be requested for specific input state etc.
 * Response: [*Input State*](#miso-input-state).
 
-### `0x11` Set Output {#mosi-set-output}
+### `0x11` Set Output <a name="mosi-set-output"></a>
 
 * Set output of slave module.
 * Command Code byte: `0x11`.
@@ -93,22 +93,22 @@ MTBbus commands
     modules or just specific output/s.
 * Response: [*ACK*](#miso-ack).
 
-### `0x12` Reset Outputs {#mosi-reset-outputs}
+### `0x12` Reset Outputs <a name="mosi-reset-outputs"></a>
 
  * [GENERAL] `RESET_OUTPUTS` – požadavek na resetování stavu výstupů do výchozího
    stavu.
 
-### `0x20` Change Address {#mosi-change-address}
+### `0x20` Change Address <a name="mosi-change-address"></a>
 
  * `CHANGE_ADDRESS` – změň adresu na zadanou; lze i jako broadcast a pak
    se změní jen u modulů se zmáčknutým tlačítkem
     - Odpověď: `ACK`
 
-### `0xE0` Speed Changed {#mosi-speed-changed}
+### `0xE0` Speed Changed <a name="mosi-speed-changed"></a>
 
  * [GENERAL] `SPEED_CHANGED`
 
-### `0xF0` Reprogramming {#mosi-reprog}
+### `0xF0` Reprogramming <a name="mosi-reprog"></a>
 
  * `REPROG` – restartuj se a připrav se na nahrání nového FW
     - Odpověď: již speciální odpověď protokolu pro nahrávání firmwaru
@@ -116,28 +116,28 @@ MTBbus commands
 
 ## Slave → Master
 
-### `0x01` Acknowledgement {#miso-ack}
+### `0x01` Acknowledgement <a name="miso-ack"></a>
 
-### `0x02` Module information {#miso-module-info}
+### `0x02` Module information <a name="miso-module-info"></a>
 
  * `INFO` `INFODATA`
  * 1 byte: typ modulu
  * 1 byte: verze FW modulu (MAJ MAJ MAJ MAJ MIN MIN MIN MIN)
 
-### `0x03` Output Set {#miso-output-set}
+### `0x03` Output Set <a name="miso-output-set"></a>
 
  * `OUT_SET` – výstup nastaven, pošle aktuální stav výstupů
 
-### `0x04` Input Changed {#miso-input-changed}
+### `0x04` Input Changed <a name="miso-input-changed"></a>
 
  * `INPUT_CHANGED` – následující data jsou specifická pro konkrétní moduly
     (obsahuje např. stav všech vstupů)
 
-### `0x05` Input State {#miso-input-state}
+### `0x05` Input State <a name="miso-input-state"></a>
 
  * `INPUT` – obsahuje stav vstupů
     - pozor: má být záměrně různé od `INPUT_CHANGED`, využito např. pro ADC
 
-### `0x06` Configuration {#miso-config}
+### `0x06` Configuration <a name="miso-config"></a>
 
  * `CONFIG` – pošle konfiguraci, odpověď na `GET_CONFIG`
