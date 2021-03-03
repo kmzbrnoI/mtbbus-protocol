@@ -57,57 +57,6 @@ Požadavky na nový MTB protokol
  * 3.–n. byte: data
  * n+1. byte: XOR
 
-## Příkazy MTBbus
-
-### master → slave
-
- * `INQUIRY` – žádost o odpovězení modulu
-   - Lze si říct, jestli chci vždy jen IDLE nebo i info o změně stavu.
-     Užití: např. v RailCom modulu.
-   - Tohle musí být konfigurace MTB-USB desky.
-   - Musí obsahovat bit, jestli při poslední žádosti dostala master deska
-     od modulu non-idle odpověď.
- * `INFO` – žádost o zaslání informací o modulu
-    - Odpověď: `INFO`
- * `SET_CONFIG` – sémantika specifická pro konkrétní modul
-    - Odpověď: `ACK`
- * `GET_CONFIG`
-    - Odpověď: `ACK`
- * `BEACON_ON`
-    - Odpověď: `ACK`
- * `BEACON_OFF`
-    - Odpověď: `ACK`
- * `GET_INPUT` – sémantika specifická pro konkrétní modul
-    - Odpověď: `INPUT`
- * `SET_OUTPUT` – sémantika specifická pro konkrétní modul
-    - Zahrnuje kmitání, nastavení návěstí, ...
-    - Odpověď: `ACK`
- * [GENERAL] `SPEED_CHANGED`
- * [GENERAL] `RESET_OUTPUTS` – požadavek na resetování stavu výstupů do výchozího
-   stavu.
- * `CHANGE_ADDRESS` – změň adresu na zadanou; lze i jako broadcast a pak
-   se změní jen u modulů se zmáčknutým tlačítkem
-    - Odpověď: `ACK`
- * `REPROG` – restartuj se a připrav se na nahrání nového FW
-    - Odpověď: již speciální odpověď protokolu pro nahrávání firmwaru
-
-### slave → master
-
- * `OUT_SET` – výstup nastaven, pošle aktuální stav výstupů
- * `IDLE`
- * `INFO` `INFODATA`
- * `INPUT_CHANGED` – následující data jsou specifická pro konkrétní moduly
-    (obsahuje např. stav všech vstupů)
- * `INPUT` – obsahuje stav vstupů
-    - pozor: má být záměrně různé od `INPUT_CHANGED`, využito např. pro ADC
- * `CONFIG` – pošle konfiguraci, odpověď na `GET_CONFIG`
- * `ACK`
-
-### `INFODATA`
-
- * 1 byte: typ modulu
- * 1 byte: verze FW modulu (MAJ MAJ MAJ MAJ MIN MIN MIN MIN)
-
 ## Požadavky na MTB-USB desku
 
  * Co si musí pamatovat
