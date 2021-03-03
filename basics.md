@@ -8,11 +8,10 @@ Basic Bus Parameters
 * Parity: None.
 * Max bus length: 100 m.
 
-Bus Structure
--------------
+## Bus Structure
 
 * Master-slave.
-* Bus should meet all RS485 requiremets, straight bus topoloy is advised.
+* Bus should meet all RS485 requirements, straight bus topology is advised.
 * Bus should be terminated on all ends via *terminator*.
   - 560 Ohm resistors advised for pull-down & pull-up.
   - 200 Ohm resistor advised between bus wires.
