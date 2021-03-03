@@ -1,5 +1,5 @@
-MTBbus protocol description
-===========================
+MTBbus Protocol Specification
+=============================
 
 ---
 **Content of this repository is under construction.**
