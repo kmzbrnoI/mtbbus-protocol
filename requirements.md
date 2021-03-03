@@ -153,6 +153,9 @@ Požadavky na nový MTB protokol
 
 ## TODO
 
+ * Popsat typický chod sběrnice
+ * Popsat příkazy pro moduly:
+   - Set Configuration
  * Má smysl mít nějaký výchozí stav výstupů jiný než 0?
    - Ano, SPAXy.
    - Co další typy modulů?

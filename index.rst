@@ -14,6 +14,9 @@ appropriate control software.
    :caption: Contents:
 
    basics
+   packet
+
+   commands/mosi/01-inquiry
 
 
 
