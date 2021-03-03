@@ -3,7 +3,7 @@ MTBbus commands
 
 ## Master → Slave
 
-### `0x01` Module Inquiry {#mosi-module-inquiry}
+### `0x01` Module Inquiry <a name="mosi-module-inquiry"></a>
 
 * This commands instructs module to respond with any information it has to
   send.
@@ -25,7 +25,7 @@ MTBbus commands
    - [*Input Changed*](#miso-input-changed) if module wants to report input
      changed event.
 
-### `0x02` Module Info Request {#mosi-info}
+### `0x02` Module Info Request <a name="mosi-info"></a>
 
 * This commands instructs slave module to send information about the module.
 * Command Code byte: `0x02`.
