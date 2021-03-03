@@ -75,6 +75,7 @@ MTBbus commands
 * Data byte 0: `0x0000000B`
   - `B`: 1 iff beacon should be on.
 * Response: [*ACK*](#miso-ack).
+  - In case command is sent as broadcast, no response should be sent.
 
 ### `0x10` Get Input <a name="mosi-get-input"></a>
 
