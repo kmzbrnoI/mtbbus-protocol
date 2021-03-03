@@ -1,5 +1,5 @@
-MTBbus Protocol Specification
-=============================
+MTBbus v4.0 Protocol Specification
+==================================
 
 ---
 
