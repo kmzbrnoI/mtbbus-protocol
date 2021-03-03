@@ -7,6 +7,7 @@ MTBbus commands
 
 * This commands instructs module to respond with any information it has to
   send.
+* Command type: for specific module only.
 * Command Code byte: `0x01`.
 * Standard abbreviation: `MODULE_INQUIRY`.
 * N.o. data bytes: 1.
@@ -28,6 +29,7 @@ MTBbus commands
 ### `0x02` Module Info Request <a name="mosi-info"></a>
 
 * This commands instructs slave module to send information about the module.
+* Command type: for specific module only.
 * Command Code byte: `0x02`.
 * Standard abbreviation: `MODULE_INFO_REQ`.
 * N.o. data bytes: 0.
@@ -35,6 +37,7 @@ MTBbus commands
 
 ### `0x03` Set Configuration <a name="mosi-set-config"></a>
 
+* Packet type: for specific module only.
 * This command instructs slave module to permanently set it's configuration.
   - The configuration should persist even if module turns off.
   - However, in typical application master module will configure all modules
@@ -50,6 +53,7 @@ MTBbus commands
 
 * This command instructs slave module to send its current configuration to
   master board.
+* Command type: for specific module only.
 * Command Code byte: `0x03`.
 * Standard abbreviation: `GET_CONFIG`.
 * N.o. data bytes: *any*.
@@ -64,6 +68,7 @@ MTBbus commands
     module physically on the bus.
   - Blue LED should be flashing in interval *300 ms on, 200 ms off* while
     beacon is on.
+* Command type: for specific module or broadcast.
 * Command Code byte: `0x05`.
 * Standard abbreviation: `BEACON`.
 * N.o. data bytes: 1.
@@ -73,7 +78,9 @@ MTBbus commands
 
 ### `0x10` Get Input <a name="mosi-get-input"></a>
 
-* In response to this command slave module should send state of its inputs.
+* In response to this command slave module should immediately send state of its
+  inputs.
+* Command type: for specific module only.
 * Command Code byte: `0x10`.
 * Standard abbreviation: `GET_INPUT`.
 * N.o. data bytes: *any*.
@@ -85,6 +92,7 @@ MTBbus commands
 ### `0x11` Set Output <a name="mosi-set-output"></a>
 
 * Set output of slave module.
+* Command type: for specific module only.
 * Command Code byte: `0x11`.
 * Standard abbreviation: `SET_OUTPUT`.
 * N.o. data bytes: *any*.
@@ -95,8 +103,12 @@ MTBbus commands
 
 ### `0x12` Reset Outputs <a name="mosi-reset-outputs"></a>
 
- * [GENERAL] `RESET_OUTPUTS` – požadavek na resetování stavu výstupů do výchozího
-   stavu.
+* Reset all outputs of slave module to default state.
+* Command type: for specific module or broadcast.
+* Command Code byte: `0x12`.
+* Standard abbreviation: `RESET_OUTPUTS`.
+* N.o. data bytes: 0.
+* Response: [*ACK*](#miso-ack).
 
 ### `0x20` Change Address <a name="mosi-change-address"></a>
 
