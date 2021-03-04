@@ -11,7 +11,7 @@ MTBbus Architecture
 * Max bus length: 100 m.
 * Max modules: 254.
 
-## Bus Structure
+## Hardware Structure
 
 * Single master, multiple slaves.
 * Bus should meet all RS485 requirements, straight bus topology is advised.
@@ -57,3 +57,10 @@ Packet consists of variable numbers of bytes.
 
 Note that when slave module sends data to master, packet starts with *Header
 Byte*. All bytes in packet from slave modules have 9. bit = 0.
+
+## Modules addressing
+
+Each MTBbus slave module has its address in range 1-255. Address could be
+determined by hardware switches/jumpers on module or just programmed in
+volatile memory. MTBbus supports mechanism for readdressing modules from master
+module/PC.

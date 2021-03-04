@@ -49,14 +49,6 @@ Požadavky na nový MTB protokol
   ADC moduly, kde se hdonota vstupů mění každou chvíli. Čtení stavu takových
   modulů bude pravděpodobně metodou "polling", nikoliv "event".
 
-## Protokol
-
- * 0. byte: adresa
- * 1. byte: délka
- * 2. byte: typ
- * 3.–n. byte: data
- * n+1. byte: XOR
-
 ## Požadavky na MTB-USB desku
 
  * Co si musí pamatovat
