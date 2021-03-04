@@ -43,3 +43,4 @@ positions etc.).
   It is defined for each module type specifically.
 * Configuration is slave modules is not part of general protocol. Is is defined
   for each module type specifically.
+* Firmware of slave modules could be upgraded directly over MTBbus.
