@@ -9,14 +9,15 @@ MTBbus Architecture
 * Stop bytes: 1.
 * Parity: None.
 * Max bus length: 100 m.
+* Max modules: 254.
 
 ## Bus Structure
 
-* Master-slave.
+* Single master, multiple slaves.
 * Bus should meet all RS485 requirements, straight bus topology is advised.
 * Bus should be terminated on all ends via *terminator*.
-  - 560 Ohm resistors advised for pull-down & pull-up.
-  - 200 Ohm resistor advised between bus wires.
+  - 560 Ohm resistors are advised for pull-down & pull-up.
+  - 200 Ohm resistor is advised between bus wires.
 
 ## Packets
 
@@ -45,12 +46,14 @@ consider addressed module as non-communicating.
 Packet consists of variable numbers of bytes.
 
 1. **Address byte** contains slave 8-bit address. Only this byte has ninth
-   bit = 1. This byte is present only in direction master → slave.
+   bit = 1. This byte is present only in direction master → slave. Each slave
+   module should receive data addressed only for the module and broadcast data.
+   Broadcast commands have address = 0. Thus module address 0 is forbidden.
 2. **Header byte** contains number of data bytes following. This number
-   excludes address byte, header byte, command type byte and xor byte.
+   excludes address byte, header byte, command type byte and checksum byte.
 3. **Command code byte**.
 4. **Data bytes**. Up to 255 data bytes.
-5. **xor** todo::CRC16?
+5. **Checksum** todo::CRC16?
 
 Note that when slave module sends data to master, packet starts with *Header
 Byte*. All bytes in packet from slave modules have 9. bit = 0.

@@ -153,7 +153,6 @@ Požadavky na nový MTB protokol
 
 ## TODO
 
- * Napsat, co značí 9. bit a kdy je aktivní (slave → master NE)
  * Popsat typický chod sběrnice
    - Firmware Upgrade Procedure
  * Popsat příkazy pro moduly:
