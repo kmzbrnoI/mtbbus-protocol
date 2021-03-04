@@ -1,7 +1,7 @@
 MTBbus commands
 ===============
 
-## Master → Slave
+## Master → Slave <a name="mosi"></a>
 
 ### `0x01` Module Inquiry <a name="mosi-module-inquiry"></a>
 
@@ -9,7 +9,7 @@ MTBbus commands
   send.
 * Command type: for specific module only.
 * Command Code byte: `0x01`.
-* Standard abbreviation: `MODULE_INQUIRY`.
+* Standard abbreviation: `MOSI_MODULE_INQUIRY`.
 * N.o. data bytes: 1.
 * Data byte 0: `0b000000CO`
    - `O`: 1 iff master received data from slave module after last
@@ -26,12 +26,12 @@ MTBbus commands
    - [*Input Changed*](#miso-input-changed) if module wants to report input
      changed event.
 
-### `0x02` Module Info Request <a name="mosi-info"></a>
+### `0x02` Module Information Request <a name="mosi-info"></a>
 
 * This commands instructs slave module to send information about the module.
 * Command type: for specific module only.
 * Command Code byte: `0x02`.
-* Standard abbreviation: `MODULE_INFO_REQ`.
+* Standard abbreviation: `MOSI_MODULE_INFO_REQ`.
 * N.o. data bytes: 0.
 * Response: [*Module information*](#miso-module-info)
 
@@ -44,7 +44,7 @@ MTBbus commands
     when modules are discovered.
   - Authoritative source of configuration is PC.
 * Command Code byte: `0x03`.
-* Standard abbreviation: `SET_CONFIG`.
+* Standard abbreviation: `MOSI_SET_CONFIG`.
 * N.o. data bytes: *any*.
 * Data bytes are specific for specific module types.
 * Response: [*ACK*](#miso-ack).
@@ -55,7 +55,7 @@ MTBbus commands
   master board.
 * Command type: for specific module only.
 * Command Code byte: `0x03`.
-* Standard abbreviation: `GET_CONFIG`.
+* Standard abbreviation: `MOSI_GET_CONFIG`.
 * N.o. data bytes: *any*.
 * Data bytes are specific for specific module types.
 * Response: [*Configuration*](#miso-config).
@@ -70,7 +70,7 @@ MTBbus commands
     beacon is on.
 * Command type: for specific module or broadcast.
 * Command Code byte: `0x05`.
-* Standard abbreviation: `BEACON`.
+* Standard abbreviation: `MOSI_BEACON`.
 * N.o. data bytes: 1.
 * Data byte 0: `0x0000000B`
   - `B`: 1 iff beacon should be on.
@@ -83,7 +83,7 @@ MTBbus commands
   inputs.
 * Command type: for specific module only.
 * Command Code byte: `0x10`.
-* Standard abbreviation: `GET_INPUT`.
+* Standard abbreviation: `MOSI_GET_INPUT`.
 * N.o. data bytes: *any*.
 * Data bytes are specific for specific module types.
   - E.g. some modules can be instructed to send full inputs state, some modules
@@ -95,19 +95,19 @@ MTBbus commands
 * Set output of slave module.
 * Command type: for specific module only.
 * Command Code byte: `0x11`.
-* Standard abbreviation: `SET_OUTPUT`.
+* Standard abbreviation: `MOSI_SET_OUTPUT`.
 * N.o. data bytes: *any*.
 * Data bytes are specific for specific module types.
   - E.g. master module could send state of all outputs in this packet for some
     modules or just specific output/s.
-* Response: [*ACK*](#miso-ack).
+* Response: [*Output Set*](#miso-output-set).
 
 ### `0x12` Reset Outputs <a name="mosi-reset-outputs"></a>
 
 * Reset all outputs of slave module to default state.
 * Command type: for specific module or broadcast.
 * Command Code byte: `0x12`.
-* Standard abbreviation: `RESET_OUTPUTS`.
+* Standard abbreviation: `MOSI_RESET_OUTPUTS`.
 * N.o. data bytes: 0.
 * Response: [*ACK*](#miso-ack).
   - When command is sent as broadcast, no response should be sent.
@@ -124,7 +124,7 @@ MTBbus commands
     by on-board button press should change address.
 * Command Code byte: `0x20`.
 * N.o. data bytes: 1.
-* Standard abbreviation: `CHANGE_ADDR`.
+* Standard abbreviation: `MOSI_CHANGE_ADDR`.
 * Data byte 0: new module address.
 * Response: [*ACK*](#miso-ack) or [*Error*](#miso-error) *Unsupported command*.
   - When command is sent as broadcast, no response should be sent.
@@ -144,7 +144,7 @@ MTBbus commands
   - `0x01` = 38400 Bd
   - `0x02` = 57600 Bd
   - `0x03` = 115200 Bd
-* Standard abbreviation: `CHANGE_SPEED`.
+* Standard abbreviation: `MOSI_CHANGE_SPEED`.
 * Response: no response.
 
 ### `0xF0` Firmware Upgrade Request <a name="mosi-reprog"></a>
@@ -154,40 +154,83 @@ MTBbus commands
 * Command type: for specific module only.
 * Command Code byte: `0xF0`.
 * N.o. data bytes: 0.
-* Standard abbreviation: `FWUPGD_REQUEST`.
+* Standard abbreviation: `MOSI_FWUPGD_REQUEST`.
 * Response: no response.
 
 
-## Slave → Master
+## Slave → Master <a name="miso"></a>
 
 ### `0x01` Acknowledgement <a name="miso-ack"></a>
 
+* Tell master module that slave module has no other data to send.
+* Command Code byte: `0x01`.
+* Standard abbreviation: `MISO_ACK`.
+* N.o. data bytes: 0.
+* In response to:
+  - [*Module Inquiry*](#mosi-module-inquiry)
+  - [*Set Configuration*](#mosi-set-config)
+  - [*Beacon*](#mosi-beacon)
+  - [*Reset Outputs*](#mosi-reset-outputs)
+  - [*Change Address*](#mosi-change-address)
+
 ### `0x02` Error <a name="miso-error"></a>
 
-* Error codes:
-  - `0x01` Unknown command.
-  - `0x02` Unsupported command.
+* Tell master module that error occured.
+* Command Code byte: `0x02`.
+* Standard abbreviation: `MISO_ERROR`.
+* N.o. data bytes: 1.
+* Data byte 0 = error code:
+  - `0x01` = unknown command (`ERR_UNKNOWN_COMMAND`).
+  - `0x02` = unsupported command (`ERR_UNSUPPORTED_COMMAND`).
 
 ### `0x03` Module information <a name="miso-module-info"></a>
 
- * `INFO` `INFODATA`
- * 1 byte: typ modulu
- * 1 byte: verze FW modulu (MAJ MAJ MAJ MAJ MIN MIN MIN MIN)
+* Report information about module.
+* Command Code byte: `0x03`.
+* Standard abbreviation: `MISO_MODULE_INFO`.
+* N.o. data bytes: 5.
+* In response to: [*Module Information Request*](#mosi-info)
 
-### `0x04` Output Set <a name="miso-output-set"></a>
+#### Module information packet bytes
 
- * `OUT_SET` – výstup nastaven, pošle aktuální stav výstupů
+ 0. [Module type](module-types.md)
+ 1. Firmware version major
+ 2. Firmware version minor
+ 3. Supported protocol version major
+ 4. Supported protocol version minor
 
-### `0x05` Input Changed <a name="miso-input-changed"></a>
+### `0x04` Module Configuration <a name="miso-config"></a>
 
- * `INPUT_CHANGED` – následující data jsou specifická pro konkrétní moduly
-    (obsahuje např. stav všech vstupů)
+* Report module current configuration.
+  - Content of the packet is specific for specific module types.
+* Command Code byte: `0x04`.
+* Standard abbreviation: `MISO_MODULE_CONFIG`.
+* N.o. data bytes: *any*.
+* In response to: [*Get Configuration*](#mosi-get-config)
 
-### `0x06` Input State <a name="miso-input-state"></a>
+### `0x10` Input Changed <a name="miso-input-changed"></a>
 
- * `INPUT` – obsahuje stav vstupů
-    - pozor: má být záměrně různé od `INPUT_CHANGED`, využito např. pro ADC
+* Report input change event.
+  - Content of the packet is specific for specific module types.
+* Command Code byte: `0x10`.
+* Standard abbreviation: `MISO_INPUT_CHANGED`.
+* N.o. data bytes: *any*.
+* In response to: [*Module Inquiry*](#mosi-module-inquiry)
 
-### `0x07` Configuration <a name="miso-config"></a>
+### `0x11` Input State <a name="miso-input-state"></a>
 
- * `CONFIG` – pošle konfiguraci, odpověď na `GET_CONFIG`
+* Report input state.
+  - Content of the packet is specific for specific module types.
+* Command Code byte: `0x11`.
+* Standard abbreviation: `MISO_INPUT_STATE`.
+* N.o. data bytes: *any*.
+* In response to: [*Get Input*](#mosi-get-input)
+
+### `0x12` Output Set <a name="miso-output-set"></a>
+
+* Report state of outputs after setting it from master module.
+  - Content of the packet is specific for specific module types.
+* Command Code byte: `0x12`.
+* Standard abbreviation: `MISO_OUTPUT_SET`.
+* N.o. data bytes: *any*.
+* In response to: [*Set Output*](#mosi-set-output)

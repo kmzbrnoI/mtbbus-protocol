@@ -18,6 +18,7 @@ appropriate control software.
  1. [Basic bus parameters](basics.md)
  2. [Packet structure](packet.md)
  3. [Commands](commands.md)
+    - [Module types](module-types.md)
     - [Commands overview](commands-overview.md)
  4. [Workflows](workflows.md)
  5. [Module-specific commands](module-commands.md)
