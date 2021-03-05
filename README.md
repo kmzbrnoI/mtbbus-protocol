@@ -29,3 +29,6 @@ document.
  4. [Workflows](workflows.md)
  5. Module-specific commands
     - [MTB-UNI](modules/uni.md)
+    - MTB-BOOST
+    - MTB-RAILCOM
+    - MTB-CROS
