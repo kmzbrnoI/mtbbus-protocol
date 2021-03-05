@@ -141,9 +141,9 @@ MTBbus commands
 * Command Code byte: `0xE0`.
 * N.o. data bytes: 1.
 * Data byte 0:
-  - `0x01` = 38400 Bd
-  - `0x02` = 57600 Bd
-  - `0x03` = 115200 Bd
+  - `0x01` = 38400 Bd
+  - `0x02` = 57600 Bd
+  - `0x03` = 115200 Bd
 * Standard abbreviation: `MOSI_CHANGE_SPEED`.
 * Response: no response.
 
