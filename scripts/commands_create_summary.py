@@ -21,7 +21,7 @@ def parse_commands(infile: TextIO) -> List[Command]:
             type_ = 'miso'
 
         try:
-            match = re.match(r'^### `(0x\d\d)` (.*) <a name="(.*)">', line)
+            match = re.match(r'^### `(0x..)` (.*) <a name="(.*)">', line)
             if match:
                 if command != {}:
                     assert code_parsed
@@ -39,7 +39,7 @@ def parse_commands(infile: TextIO) -> List[Command]:
             if match:
                 command['mositype'] = match.group(1)
 
-            match = re.match(r'^\* Command Code byte: `(0x\d\d)`', line)
+            match = re.match(r'^\* Command Code byte: `(0x..)`', line)
             if match:
                 assert int(match.group(1), base=16) == command['code'], \
                     f'{match.group(1)} != {command["code"]}'

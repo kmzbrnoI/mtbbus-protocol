@@ -47,6 +47,16 @@
 <tr>
  <td><a href="commands.md#mosi-change-address">Change Address</a></td>
  <td><code>0x20</code></td>
+ <td><code>MOSI_CHANGE_ADDR</code></td>
+</tr>
+<tr>
+ <td><a href="commands.md#mosi-speed-changed">Change Speed</a></td>
+ <td><code>0xe0</code></td>
+ <td><code>MOSI_CHANGE_SPEED</code></td>
+</tr>
+<tr>
+ <td><a href="commands.md#mosi-reprog">Firmware Upgrade Request</a></td>
+ <td><code>0xf0</code></td>
  <td><code>MOSI_FWUPGD_REQUEST</code></td>
 </tr>
 </table>
