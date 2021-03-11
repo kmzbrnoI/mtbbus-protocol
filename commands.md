@@ -21,7 +21,7 @@ MTBbus commands
      If this bit is 0, slave module should always respond only with
      [`ACK`](#miso-ack). In this case, modules are polled for their input
      status.
-* Possible responses:
+* Response: [*ACK*](#miso-ack) or [*Input Changed*](#miso-input-changed).
    - [*ACK*](#miso-ack) if module has no data to send.
    - [*Input Changed*](#miso-input-changed) if module wants to report input
      changed event.

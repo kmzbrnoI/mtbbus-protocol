@@ -53,6 +53,10 @@ def parse_commands(infile: TextIO) -> List[Command]:
             if match:
                 command['data_bytes'] = match.group(1)
 
+            if line.startswith('* Response:'):
+                match = re.findall(r'\[\*?(.*?)\*?\]\(#(.*?)\)', line)
+                command['responses'] = match if match else []
+
         except Exception:
             print(f'Failed on command: {command}')
             raise
@@ -80,19 +84,35 @@ def gen_table(commands: List[Command], ostream: TextIO) -> None:
         '<th>Command</th>'
         '<th>Code byte</th>'
         '<th>Abbreviation</th>'
-        '</tr>\n')
+    )
+    if 'responses' in commands[0]:
+        ostream.write('<th>Response</th>')
+    ostream.write('</tr>\n')
 
     for command in commands:
-        gen_table_line(command, ostream)
+        try:
+            gen_table_line(command, ostream)
+        except Exception:
+            print(f'Generating table failed for command: {command}')
+            raise
 
     ostream.write('</table>\n')
 
 
 def gen_table_line(command: Command, ostream: TextIO) -> None:
+    if 'responses' in command:
+        responses = ', '.join(
+            f'<a href="commands.md#{link}">{name}</a>' for name, link in command['responses']
+        )
+        if responses == '':
+            responses = '–'
+
     ostream.write('<tr>\n')
     ostream.write(f' <td><a href="commands.md#{command["link"]}">{command["name"]}</a></td>\n')
     ostream.write(f' <td><code>{hex(command["code"])}</code></td>\n')
     ostream.write(f' <td><code>{command["abbreviation"]}</code></td>\n')
+    if 'responses' in command:
+        ostream.write(f' <td>{responses}</td>\n')
     ostream.write('</tr>\n')
 
 
