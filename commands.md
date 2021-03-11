@@ -54,7 +54,7 @@ MTBbus commands
 * This command instructs slave module to send its current configuration to
   master board.
 * Command type: for specific module only.
-* Command Code byte: `0x03`.
+* Command Code byte: `0x04`.
 * Standard abbreviation: `MOSI_GET_CONFIG`.
 * N.o. data bytes: *any*.
 * Data bytes are specific for specific module types.

@@ -25,7 +25,7 @@ document.
  2. [MTBbus Architecture](architecture.md)
  3. [Commands](commands.md)
     - [Module types](module-types.md)
-    - [Commands overview](commands-overview.md)
+    - [Commands summary](commands-summary.md)
  4. [Workflows](workflows.md)
  5. Module-specific commands
     - [MTB-UNI](modules/uni.md)
