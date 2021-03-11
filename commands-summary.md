@@ -5,49 +5,49 @@
 <table>
 <tr><th>Command</th><th>Code byte</th><th>Abbreviation</th></tr>
 <tr>
- <td>[Module Inquiry](commands.md#mosi-module-inquiry)</td>
- <td>`0x1`</td>
- <td>`MOSI_MODULE_INQUIRY`</td>
+ <td><a href="commands.md#mosi-module-inquiry">Module Inquiry</a></td>
+ <td><code>0x1</code></td>
+ <td><code>MOSI_MODULE_INQUIRY</code></td>
 </tr>
 <tr>
- <td>[Module Information Request](commands.md#mosi-info)</td>
- <td>`0x2`</td>
- <td>`MOSI_MODULE_INFO_REQ`</td>
+ <td><a href="commands.md#mosi-info">Module Information Request</a></td>
+ <td><code>0x2</code></td>
+ <td><code>MOSI_MODULE_INFO_REQ</code></td>
 </tr>
 <tr>
- <td>[Set Configuration](commands.md#mosi-set-config)</td>
- <td>`0x3`</td>
- <td>`MOSI_SET_CONFIG`</td>
+ <td><a href="commands.md#mosi-set-config">Set Configuration</a></td>
+ <td><code>0x3</code></td>
+ <td><code>MOSI_SET_CONFIG</code></td>
 </tr>
 <tr>
- <td>[Get Configuration](commands.md#mosi-get-config)</td>
- <td>`0x4`</td>
- <td>`MOSI_GET_CONFIG`</td>
+ <td><a href="commands.md#mosi-get-config">Get Configuration</a></td>
+ <td><code>0x4</code></td>
+ <td><code>MOSI_GET_CONFIG</code></td>
 </tr>
 <tr>
- <td>[Beacon](commands.md#mosi-beacon)</td>
- <td>`0x5`</td>
- <td>`MOSI_BEACON`</td>
+ <td><a href="commands.md#mosi-beacon">Beacon</a></td>
+ <td><code>0x5</code></td>
+ <td><code>MOSI_BEACON</code></td>
 </tr>
 <tr>
- <td>[Get Input](commands.md#mosi-get-input)</td>
- <td>`0x10`</td>
- <td>`MOSI_GET_INPUT`</td>
+ <td><a href="commands.md#mosi-get-input">Get Input</a></td>
+ <td><code>0x10</code></td>
+ <td><code>MOSI_GET_INPUT</code></td>
 </tr>
 <tr>
- <td>[Set Output](commands.md#mosi-set-output)</td>
- <td>`0x11`</td>
- <td>`MOSI_SET_OUTPUT`</td>
+ <td><a href="commands.md#mosi-set-output">Set Output</a></td>
+ <td><code>0x11</code></td>
+ <td><code>MOSI_SET_OUTPUT</code></td>
 </tr>
 <tr>
- <td>[Reset Outputs](commands.md#mosi-reset-outputs)</td>
- <td>`0x12`</td>
- <td>`MOSI_RESET_OUTPUTS`</td>
+ <td><a href="commands.md#mosi-reset-outputs">Reset Outputs</a></td>
+ <td><code>0x12</code></td>
+ <td><code>MOSI_RESET_OUTPUTS</code></td>
 </tr>
 <tr>
- <td>[Change Address](commands.md#mosi-change-address)</td>
- <td>`0x20`</td>
- <td>`MOSI_FWUPGD_REQUEST`</td>
+ <td><a href="commands.md#mosi-change-address">Change Address</a></td>
+ <td><code>0x20</code></td>
+ <td><code>MOSI_FWUPGD_REQUEST</code></td>
 </tr>
 </table>
 
@@ -57,33 +57,33 @@
 <table>
 <tr><th>Command</th><th>Code byte</th><th>Abbreviation</th></tr>
 <tr>
- <td>[Acknowledgement](commands.md#miso-ack)</td>
- <td>`0x1`</td>
- <td>`MISO_ACK`</td>
+ <td><a href="commands.md#miso-ack">Acknowledgement</a></td>
+ <td><code>0x1</code></td>
+ <td><code>MISO_ACK</code></td>
 </tr>
 <tr>
- <td>[Error](commands.md#miso-error)</td>
- <td>`0x2`</td>
- <td>`MISO_ERROR`</td>
+ <td><a href="commands.md#miso-error">Error</a></td>
+ <td><code>0x2</code></td>
+ <td><code>MISO_ERROR</code></td>
 </tr>
 <tr>
- <td>[Module information](commands.md#miso-module-info)</td>
- <td>`0x3`</td>
- <td>`MISO_MODULE_INFO`</td>
+ <td><a href="commands.md#miso-module-info">Module information</a></td>
+ <td><code>0x3</code></td>
+ <td><code>MISO_MODULE_INFO</code></td>
 </tr>
 <tr>
- <td>[Module Configuration](commands.md#miso-config)</td>
- <td>`0x4`</td>
- <td>`MISO_MODULE_CONFIG`</td>
+ <td><a href="commands.md#miso-config">Module Configuration</a></td>
+ <td><code>0x4</code></td>
+ <td><code>MISO_MODULE_CONFIG</code></td>
 </tr>
 <tr>
- <td>[Input Changed](commands.md#miso-input-changed)</td>
- <td>`0x10`</td>
- <td>`MISO_INPUT_CHANGED`</td>
+ <td><a href="commands.md#miso-input-changed">Input Changed</a></td>
+ <td><code>0x10</code></td>
+ <td><code>MISO_INPUT_CHANGED</code></td>
 </tr>
 <tr>
- <td>[Input State](commands.md#miso-input-state)</td>
- <td>`0x11`</td>
- <td>`MISO_INPUT_STATE`</td>
+ <td><a href="commands.md#miso-input-state">Input State</a></td>
+ <td><code>0x11</code></td>
+ <td><code>MISO_INPUT_STATE</code></td>
 </tr>
 </table>

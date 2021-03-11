@@ -90,9 +90,9 @@ def gen_table(commands: List[Command], ostream: TextIO) -> None:
 
 def gen_table_line(command: Command, ostream: TextIO) -> None:
     ostream.write('<tr>\n')
-    ostream.write(f' <td>[{command["name"]}](commands.md#{command["link"]})</td>\n')
-    ostream.write(f' <td>`{hex(command["code"])}`</td>\n')
-    ostream.write(f' <td>`{command["abbreviation"]}`</td>\n')
+    ostream.write(f' <td><a href="commands.md#{command["link"]}">{command["name"]}</a></td>\n')
+    ostream.write(f' <td><code>{hex(command["code"])}</code></td>\n')
+    ostream.write(f' <td><code>{command["abbreviation"]}</code></td>\n')
     ostream.write('</tr>\n')
 
 
