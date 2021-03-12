@@ -188,16 +188,18 @@ MTBbus commands
 * Report information about module.
 * Command Code byte: `0x03`.
 * Standard abbreviation: `MISO_MODULE_INFO`.
-* N.o. data bytes: 5.
+* N.o. data bytes: 6.
 * In response to: [*Module Information Request*](#mosi-info)
 
 #### Module information packet bytes
 
  0. [Module type](module-types.md)
- 1. Firmware version major
- 2. Firmware version minor
- 3. Supported protocol version major
- 4. Supported protocol version minor
+ 1. Module flags
+    - bit 0: module failed to boot (module is in bootloader)
+ 2. Firmware version major
+ 3. Firmware version minor
+ 4. Supported protocol version major
+ 5. Supported protocol version minor
 
 ### `0x04` Module Configuration <a name="miso-config"></a>
 
