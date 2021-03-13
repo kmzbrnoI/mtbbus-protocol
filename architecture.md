@@ -49,10 +49,10 @@ Packet consists of variable numbers of bytes.
    bit = 1. This byte is present only in direction master → slave. Each slave
    module should receive data addressed only for the module and broadcast data.
    Broadcast commands have address = 0. Thus module address 0 is forbidden.
-2. **Header byte** contains number of data bytes following. This number
+2. **Message length byte** contains number of data bytes following. This number
    excludes address byte, header byte, command type byte and checksum byte.
 3. **Command code byte**.
-4. **Data bytes**. Up to 255 data bytes.
+4. **Data bytes**. Up to 120 data bytes (128 bytes buffer).
 5. **Checksum** todo::CRC16?
 
 Note that when slave module sends data to master, packet starts with *Header
