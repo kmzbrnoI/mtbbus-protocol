@@ -50,13 +50,23 @@ Packet consists of variable numbers of bytes.
    module should receive data addressed only for the module and broadcast data.
    Broadcast commands have address = 0. Thus module address 0 is forbidden.
 2. **Message length byte** contains number of data bytes following. This number
-   excludes address byte, header byte, command type byte and checksum byte.
+   excludes address byte, header byte, command type byte and checksum bytes.
 3. **Command code byte**.
 4. **Data bytes**. Up to 120 data bytes (128 bytes buffer).
-5. **Checksum** todo::CRC16?
+5. **Checksum** CRC-16 (2 bytes).
 
 Note that when slave module sends data to master, packet starts with *Header
 Byte*. All bytes in packet from slave modules have 9. bit = 0.
+
+### CRC-16
+
+* Polynomial: x¹⁶ + x¹⁵ + x² + 1 (*CRC-16-ANSI* also known as *CRC-16-IBM*,
+  normal hexadecimal algebraic polynomial being `0x8005` and reversed `0xA001`).
+* Initial value: `65536`, `0xFFFF`.
+* CRC-bytes: least significant byte is transmitted first.
+* Checksum includes whole packet: starting from *address byte* to last byte of
+  *data bytes*.
+* Example of packet: TODO.
 
 ## Modules addressing
 
@@ -64,3 +74,7 @@ Each MTBbus slave module has its address in range 1-255. Address could be
 determined by hardware switches/jumpers on module or just programmed in
 volatile memory. MTBbus supports mechanism for readdressing modules from master
 module/PC.
+
+## Errors
+
+If slave module receives bad checksum, it must not respond.
