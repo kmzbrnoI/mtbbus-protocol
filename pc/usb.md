@@ -138,3 +138,21 @@ natively.
   - ...
   - Data byte 31: modules 248–255.
 * In response to: [*Active modules request*](#pn-active-moduoles-req).
+
+### `0x23` New module discovered <a name="mp-new-module"></a>
+
+* Inform PC that new module was discovered on the bus.
+* Command Code byte: `0x23`.
+* Standard abbreviation: `MTBUSB_MP_NEW_MODULE`.
+* N.o. data bytes: 1.
+  - Data byte 0: slave module address.
+* In response to: nothing, could be sent anytime.
+
+### `0x24` Module failed <a name="mp-module-failed"></a>
+
+* Inform PC that active module stopped responding to MTBbus *Module Inquiry*.
+* Command Code byte: `0x24`.
+* Standard abbreviation: `MTBUSB_MP_MODULE_FAILED`.
+* N.o. data bytes: 1.
+  - Data byte 0: slave module address.
+* In response to: nothing, could be sent anytime.
