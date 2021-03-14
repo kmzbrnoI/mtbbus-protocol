@@ -18,8 +18,8 @@ computer. Master module takes care of proper timing of RS485.
 
 This protocol describes protocol over RS485 MTBbus between master and slave
 modules. Note that for connection of MTBbus to PC protocol between MTB-USB
-module and PC must also be described. This protocol is described in another
-document.
+module and PC must also be described. This protocol is described in [another
+document](pc).
 
 1. [MTBbus goals](goals.md)
 2. [MTBbus Architecture](architecture.md)
