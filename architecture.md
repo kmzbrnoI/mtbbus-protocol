@@ -49,8 +49,8 @@ Packet consists of variable numbers of bytes.
    bit = 1. This byte is present only in direction master → slave. Each slave
    module should receive data addressed only for the module and broadcast data.
    Broadcast commands have address = 0. Thus module address 0 is forbidden.
-2. **Message length byte** contains number of data bytes following. This number
-   excludes address byte, header byte, command type byte and checksum bytes.
+2. **Command length byte** contains number of data bytes following. This number
+   excludes checksum bytes. Max value = 121.
 3. **Command code byte**.
 4. **Data bytes**. Up to 120 data bytes (128 bytes buffer).
 5. **Checksum** CRC-16 (2 bytes).
