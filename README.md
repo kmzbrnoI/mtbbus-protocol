@@ -21,14 +21,14 @@ modules. Note that for connection of MTBbus to PC protocol between MTB-USB
 module and PC must also be described. This protocol is described in another
 document.
 
- 1. [MTBbus goals](goals.md)
- 2. [MTBbus Architecture](architecture.md)
- 3. [Commands](commands.md)
-    - [Module types](module-types.md)
-    - [Commands summary](commands-summary.md)
- 4. [Workflows](workflows.md)
- 5. Module-specific commands
-    - [MTB-UNI](modules/uni.md)
-    - MTB-BOOST
-    - MTB-RAILCOM
-    - MTB-CROS
+1. [MTBbus goals](goals.md)
+2. [MTBbus Architecture](architecture.md)
+3. [Commands](commands.md)
+   - [Module types](module-types.md)
+   - [Commands summary](commands-summary.md)
+4. [Workflows](workflows.md)
+5. Module-specific commands
+   - [MTB-UNI](modules/uni.md)
+   - MTB-BOOST
+   - MTB-RAILCOM
+   - MTB-CROS
