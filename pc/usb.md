@@ -67,6 +67,14 @@ natively.
   - `0x03` = 115200 Bd
 * Response: [*ACK*](#mp-ack).
 
+### `0x22` Active modules request <a name="pm-actives-modules-req"></a>
+
+* This command asks MTB-USB to send list of currently active modules on MTBbus.
+* Command Code byte: `0x22`.
+* Standard abbreviation: `MTBUSB_PM_ACTIVE_MODULES_REQ`.
+* N.o. data bytes: 0.
+* Response: [*Active modules list*](#mp-active-modules-list).
+
 
 ## MTB-USB → PC <a name="mtbtopc"></a>
 
@@ -118,3 +126,15 @@ natively.
  3. Firmware version minor
  4. Supported protocol version major
  5. Supported protocol version minor
+
+### `0x22` Active modules list <a name="mp-active-modules-list"></a>
+
+* Send list of active modules to PC.
+* Command Code byte: `0x22`.
+* Standard abbreviation: `MTBUSB_MP_ACTIVE_MODULES_LIST`.
+* N.o. data bytes: 32.
+  - Data byte 0: `0b76543210`. Bit `0` says that module `0` is present of not etc.
+  - Data byte 1: `0bFEDCBA98`: modules 8–15.
+  - ...
+  - Data byte 31: modules 248–255.
+* In response to: [*Active modules request*](#pn-active-moduoles-req).
