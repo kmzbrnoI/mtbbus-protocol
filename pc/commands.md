@@ -1,24 +1,5 @@
-MTB-USB to PC Protocol
+MTB-USB to PC Commands
 ======================
-
-This document describes MTB-USB module communication with PC. MTB-USB module
-is designed as thin module: it periodically scans MTBbus and forwards packets
-between USB and MTBbus. Communication with PC takes place over USB CDC serial
-port.
-
-## Packet structure
-
-Packet consists of variable numbers of bytes. Packet structure is same in
-both directions.
-
-1. **Magic byte** `0x2A`.
-2. **Magic byte** `0x42`.
-3. **Command length byte** contains number of data bytes following.
-4. **Command code byte**.
-5. **Data bytes**. Up to 122 data bytes (128 bytes buffer).
-
-Message does not contain any checksum as checksum is handled by USB bus
-natively.
 
 ## PC → MTB-USB <a name="pctomtb"></a>
 
