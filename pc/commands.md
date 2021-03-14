@@ -16,9 +16,11 @@ MTB-USB to PC Commands
 * Checksum for MTBbus packet as well as *Command length byte* is calculated in
   MTB-USB automatically.
 * Response:
-  - When slave device address is nonzero, MTB-USB does not send any direct
+  - When slave device address is nonzero, MTB-USB does not send any ok
     response to this packet. However, response from slave module in forwarded to
-    PC via [*Packet from MTBbus command*](#mp-forward).
+    PC via [*Packet from MTBbus command*](#mp-forward). If slave module does
+    not respond to command [*Error No response from slave module*](#mp-error)
+    is sent to PC.
   - When slave device address is `0` (broadcast), MTB-USB responds with
     [*ACK*](#mp-ack).
 * PC should not send these MTBbus packets:
@@ -74,8 +76,12 @@ MTB-USB to PC Commands
 * Tell PC that error occurred while processing command for MTB-USB module.
 * Command Code byte: `0x02`.
 * Standard abbreviation: `MTBUSB_MP_ERROR`.
-* N.o. data bytes: 0.
-* In response to: nothing yet.
+* N.o. data bytes: 2.
+  - Data byte 1: error code:
+    - `0x01` *No response from slave module*
+  - Data byte 2: *Command code byte* of command for which error is generated.
+* In response to:
+  - [Forward packet to MTBbus](pm-forward)
 
 ### `0x10` Packet from MTBbus <a name="mp-forward"></a>
 
