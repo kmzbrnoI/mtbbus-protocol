@@ -195,7 +195,8 @@ MTBbus commands
 
  0. [Module type](module-types.md)
  1. Module flags
-    - bit 0: module failed to boot (module is in bootloader)
+    - bit 0: module is intentionally in bootloader ready for firmware upgrade
+    - bit 1: module is unintentionally in bootloader, memory checksum failed
  2. Firmware version major
  3. Firmware version minor
  4. Supported protocol version major
