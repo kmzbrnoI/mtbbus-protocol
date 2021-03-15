@@ -16,10 +16,9 @@ IO modules. Master module is in charge of whole bus. Master module is usually
 connected to the computer too, thus MTBbus is basically controlled from the
 computer. Master module takes care of proper timing of RS485.
 
-This protocol describes protocol over RS485 MTBbus between master and slave
-modules. Note that for connection of MTBbus to PC protocol between MTB-USB
-module and PC must also be described. This protocol is described in [another
-document](pc).
+This document describes RS485-based protocol between master and slave modules.
+Note that for connection of MTBbus to PC protocol between MTB-USB module and PC
+must also be described. This protocol is available [here](pc).
 
 1. [MTBbus goals](goals.md)
 2. [MTBbus Architecture](architecture.md)
