@@ -5,8 +5,8 @@ MTBbus Architecture
 
 * Hardware layer: RS485, 2-wire communication (+ common ground).
 * Communication speed: variable. 38400 Bd, 57600 Bd, 115200 Bd.
-* Data bytes: 9.
-* Stop bytes: 1.
+* Data bits: 9.
+* Stop bits: 1.
 * Parity: None.
 * Max bus length: 100 m.
 * Max modules: 254.
