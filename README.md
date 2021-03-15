@@ -12,7 +12,7 @@ modules. It's original aim is to control model railroad accessories (e.g.
 turnouts, signals etc.) however the bus is designed generally and extendably.
 
 The bus consists of a single master module (MTB-USB module) and up to 254
-IO modules. Master modules is in charge of whole bus. Master module is usually
+IO modules. Master module is in charge of whole bus. Master module is usually
 connected to the computer too, thus MTBbus is basically controlled from the
 computer. Master module takes care of proper timing of RS485.
 
