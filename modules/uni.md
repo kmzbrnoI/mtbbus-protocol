@@ -61,7 +61,10 @@ Master → slave:
       `0x05 0x00 0xF0 0x00 0x42 0x8A`.
   - Bits in *binary state output* which are masked by *full state mask* can
     contain any value. This value is ignored.
-
+* *Firmware Write Flash*
+  - Data byte 0: first byte flash address high.
+  - Data byte 1: first byte flash address low.
+  - Data byte 2–65: 64 bytes of memory data.
 
 Slave → master:
 

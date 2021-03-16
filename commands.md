@@ -280,4 +280,5 @@ MTBbus commands
   - `0x00` Flash Written
   - `0x01` Writing flash
   - `0x02` Received packet checksum error
+  - `0x03` Invalid memory address error
 * In response to: [*Firmware Write Flash Status Request*](#mosi-write-flash-status-req)
