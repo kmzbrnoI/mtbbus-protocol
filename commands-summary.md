@@ -23,6 +23,7 @@
  <td><code>0x3</code></td>
  <td><code>MOSI_SET_CONFIG</code></td>
  <td><a href="commands.md#miso-ack">ACK</a></td>
+ <td>address</td>
 </tr>
 <tr>
  <td><a href="commands.md#mosi-get-config">Get Configuration</a></td>

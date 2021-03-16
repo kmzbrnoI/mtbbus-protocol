@@ -37,7 +37,7 @@ MTBbus commands
 
 ### `0x03` Set Configuration <a name="mosi-set-config"></a>
 
-* Packet type: for specific module only.
+* Command type: for specific module only.
 * This command instructs slave module to permanently set it's configuration.
   - The configuration should persist even if module turns off.
   - However, in typical application master module will configure all modules
