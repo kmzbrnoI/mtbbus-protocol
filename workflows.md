@@ -57,3 +57,18 @@ misconfigured module, instruct it to change speed and change bus speed back.
 
 All slave modules could be upgraded directly over MTBbus. While upgrading,
 other communication over bus is advised to be stopped.
+
+Upgrade procedure for single module in as follows (M = master = MTB-USB, S =
+slave):
+
+1. M>S: [*Firmware Upgrade Request*](commands.md#mosi-reprog).
+2. Response S>M: [*ACK*](commands.md#miso-ack), slave reboots to bootloader.
+3. M>S: [*Module Information Request*](commands.md#mosi-info).
+4. Response S>M: [*Module information*](commands.md#miso-module-info) – module is in bootloader.
+5. M>S: [*Firmware Write Flash*](commands.md#mosi-write-flash): address, 64 bytes of data.
+6. Response S>M: [*ACK*](commands.md#miso-ack).
+7. Slave starts writing flash.
+8. M>S: [*Firmware Write Flash Status Request*](commands.md#mosi-write-flash-status-req)
+9. S>M: [*Firmware Write Status*](commands.md#miso-write-flash-status): writing flash / flash written / error.
+10. M>S [*Reboot*](commands.md#mosi-reboot).
+11. Slave checks checksum of flash at boot.
