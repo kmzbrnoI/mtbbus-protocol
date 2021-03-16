@@ -57,6 +57,10 @@ def parse_commands(infile: TextIO) -> List[Command]:
                 match = re.findall(r'\[\*?(.*?)\*?\]\(#(.*?)\)', line)
                 command['responses'] = match if match else []
 
+            if line.startswith('* Command type:'):
+                command['address'] = 'specific module' in line
+                command['broadcast'] = 'broadcast' in line
+
         except Exception:
             print(f'Failed on command: {command}')
             raise
@@ -92,6 +96,8 @@ def gen_table(commands: List[Command], ostream: TextIO) -> None:
     )
     if 'responses' in commands[0]:
         ostream.write('<th>Response</th>')
+    if 'broadcast' in commands[0]:
+        ostream.write('<th>Addressed</th>')
     ostream.write('</tr>\n')
 
     for command in commands:
@@ -118,6 +124,14 @@ def gen_table_line(command: Command, ostream: TextIO) -> None:
     ostream.write(f' <td><code>{command["abbreviation"]}</code></td>\n')
     if 'responses' in command:
         ostream.write(f' <td>{responses}</td>\n')
+    if 'broadcast' in command and 'address' in command:
+        type_ = []
+        if command['address']:
+            type_.append('address')
+        if command['broadcast']:
+            type_.append('broadcast')
+        type_ = ', '.join(type_)
+        ostream.write(f' <td>{type_}</td>\n')
     ostream.write('</tr>\n')
 
 
