@@ -1,6 +1,8 @@
 MTB-UNI Module
 ==============
 
+Specification for modules `0x10` & `0x15`.
+
 MTB-UNI module is most used MTBbus modules. It contains 16 digital inputs and
 16 digital outputs. Any output is capable of S-COM protocol transmission as
 well as flickering.
