@@ -31,3 +31,18 @@ must also be described. This protocol is available [here](pc).
    - MTB-BOOST
    - MTB-RAILCOM
    - MTB-CROS
+
+## Changelog
+
+Available [here](changelog.md).
+
+## Authors
+
+ * [Jan Horacek](mailto:jan.horacek@kmz-brno.cz)
+
+## License
+
+Content of the repository is provided under [Creative Commons
+Attribution-ShareAlike 4.0
+License](https://creativecommons.org/licenses/by-sa/4.0/). You may download see
+the protocol, use it in your own modules and contribute to it.
