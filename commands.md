@@ -153,10 +153,42 @@ MTBbus commands
   for firmware upgrade.
 * Command type: for specific module only.
 * Command Code byte: `0xF0`.
-* N.o. data bytes: 0.
+* N.o. data bytes: 1.
+  - Data byte 0: upgrade type:
+    - `0x00` for main firmware upgrade.
 * Standard abbreviation: `MOSI_FWUPGD_REQUEST`.
+* Response: [*ACK*](#miso-ack).
+  - Response should be sent immediately (before reboot to bootloader)!
+
+### `0xF1` Firmware Write Flash <a name="mosi-write-flash"></a>
+
+* This command contains part of new firmware to write to slave's device flash.
+* Command type: for specific module only.
+* Command Code byte: `0xF1`.
+* N.o. data bytes: *any*.
+* Data bytes are specific for specific module types.
+* Standard abbreviation: `MOSI_WRITE_FLASH`.
 * Response: no response.
 
+### `0xF2` Firmware Write Flash Status Request <a name="mosi-write-flash-status-req"></a>
+
+* This command contains part of new firmware to write to slave's device flash.
+* Command type: for specific module only.
+  - Advised behavior: send 64 bytes of flash memory & memory address.
+* Command Code byte: `0xF2`.
+* N.o. data bytes: 0.
+* Standard abbreviation: `MOSI_WRITE_FLASH_STATUS_REQ`.
+* Response: [*Firmware Write Flash Status*](#miso-write-flash-status).
+
+### `0xFF` Reboot <a name="mosi-reboot"></a>
+
+* This command instructs slave module to reboot.
+* Command type: for specific module only or broadcast.
+* Command Code byte: `0xFF`.
+* N.o. data bytes: 0.
+* Standard abbreviation: `MOSI_REBOOT`.
+* Response: [*ACK*](#miso-ack).
+  - When command is sent as broadcast, no response should be sent.
 
 ## Slave → Master <a name="miso"></a>
 
@@ -237,3 +269,15 @@ MTBbus commands
 * Standard abbreviation: `MISO_OUTPUT_SET`.
 * N.o. data bytes: *any*.
 * In response to: [*Set Output*](#mosi-set-output)
+
+### `0xF2` Firmware Write Flash Status <a name="miso-write-flash-status"></a>
+
+* Report state of writing new firmware to flash.
+* Command Code byte: `0xF2`.
+* Standard abbreviation: `MISO_WRITE_FLASH_STATUS`.
+* N.o. data bytes: 1.
+* Data byte 0:
+  - `0x00` Flash Written
+  - `0x01` Writing flash
+  - `0x02` Received packet checksum error
+* In response to: [*Firmware Write Flash Status Request*](#mosi-write-flash-status-req)

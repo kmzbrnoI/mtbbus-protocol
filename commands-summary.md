@@ -68,7 +68,25 @@
  <td><a href="commands.md#mosi-reprog">Firmware Upgrade Request</a></td>
  <td><code>0xf0</code></td>
  <td><code>MOSI_FWUPGD_REQUEST</code></td>
+ <td><a href="commands.md#miso-ack">ACK</a></td>
+</tr>
+<tr>
+ <td><a href="commands.md#mosi-write-flash">Firmware Write Flash</a></td>
+ <td><code>0xf1</code></td>
+ <td><code>MOSI_WRITE_FLASH</code></td>
  <td>–</td>
+</tr>
+<tr>
+ <td><a href="commands.md#mosi-write-flash-status-req">Firmware Write Flash Status Request</a></td>
+ <td><code>0xf2</code></td>
+ <td><code>MOSI_WRITE_FLASH_STATUS_REQ</code></td>
+ <td><a href="commands.md#miso-write-flash-status">Firmware Write Flash Status</a></td>
+</tr>
+<tr>
+ <td><a href="commands.md#mosi-reboot">Reboot</a></td>
+ <td><code>0xff</code></td>
+ <td><code>MOSI_REBOOT</code></td>
+ <td><a href="commands.md#miso-ack">ACK</a></td>
 </tr>
 </table>
 
@@ -106,5 +124,10 @@
  <td><a href="commands.md#miso-input-state">Input State</a></td>
  <td><code>0x11</code></td>
  <td><code>MISO_INPUT_STATE</code></td>
+</tr>
+<tr>
+ <td><a href="commands.md#miso-output-set">Output Set</a></td>
+ <td><code>0x12</code></td>
+ <td><code>MISO_OUTPUT_SET</code></td>
 </tr>
 </table>
