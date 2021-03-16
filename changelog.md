@@ -12,12 +12,12 @@ Changes from [version 2.0](https://mtb.kmz-brno.cz/assets/pdf/mtb-protok20.pdf)
 ### New features
 
 * Do not hardcode module types in general protocol. Use 2-level abstraction:
-  define general command and their specification for slave modules. This allows
+  define general commands and their specialization for slave modules. This allows
   to smoothly add new module types in future.
-* Bus detects new modules while maintaining normal operation,
-* No scanning procedure, staring & stopping of the bus required. Bus runs always,
-  always checks for module failures and always scans for new modules.
-  - Slave modules are hot-swappable.
+* Bus detects new modules while maintaining normal operation.
+* No scanning procedure nor starting & stopping of the bus is required. Bus
+  runs always, always checks for module failures and always scans for new
+  modules.  - Slave modules are hot-swappable.
 * Firmware of slave modules could be upgraded directly over MTBbus.
 * Each module has special LED which could be turned on/off from operator's
   computer. This allows operator to find module under the layout fast (*beacon
@@ -32,3 +32,10 @@ Changes from [version 2.0](https://mtb.kmz-brno.cz/assets/pdf/mtb-protok20.pdf)
   signal on railway signals is set etc.).
 * All outputs of MTB-UNI module can be S-COM.
 * Added more flickering frequencies of outputs of MTB-UNI.
+* Dropped support for MTB-REG & MTB-POT modules.
+
+### What does NOT change
+
+* Hardware layer (compatibility with old wiring assured).
+* Authoritative source of configuration of slave modules is computer.
+* Bus can have multiple speeds.
