@@ -61,6 +61,11 @@ def parse_commands(infile: TextIO) -> List[Command]:
             print(f'Failed on command: {command}')
             raise
 
+
+    if command != {}:
+        assert code_parsed
+        commands.append(command)
+
     return commands
 
 

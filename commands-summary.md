@@ -130,4 +130,9 @@
  <td><code>0x12</code></td>
  <td><code>MISO_OUTPUT_SET</code></td>
 </tr>
+<tr>
+ <td><a href="commands.md#miso-write-flash-status">Firmware Write Flash Status</a></td>
+ <td><code>0xf2</code></td>
+ <td><code>MISO_WRITE_FLASH_STATUS</code></td>
+</tr>
 </table>
