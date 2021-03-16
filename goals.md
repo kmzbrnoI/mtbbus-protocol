@@ -7,7 +7,7 @@ positions etc.).
 
 ## High-level goals
 
-* MTBbus should be simple (it should relay on existing hardware archtecture).
+* MTBbus should be simple (it should rely on existing hardware archtecture).
 * Development of MTBbus as well as MTBbus modules should be open, so anyone can
   use the bus.
 * Bus does NOT have to be compatible with commercial model railroad buses.
