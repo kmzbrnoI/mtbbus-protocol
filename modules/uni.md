@@ -72,8 +72,8 @@ Slave → master:
 
 * *Module Configuration*: n.o. data bytes: 24. Whole configuration is sent.
 * *Input Changed*: n.o. data bytes: 2. Full state of inputs is sent.
-  - Data byte 0: inputs 0-7.
-  - Data byte 1: inputs 8-15.
+  - Data byte 0: inputs `0bFEDCBA98`.
+  - Data byte 1: inputs `0b76543210`.
   - Order of inputs in byte: `0b76543210`.
 * *Input State*: n.o. data bytes: 2. Full state of inputs is sent.
 * *Output Set*: n.o. data bytes: variable. Same data bytes as in message *Set
