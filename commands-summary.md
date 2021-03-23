@@ -85,7 +85,7 @@
  <td><a href="commands.md#mosi-write-flash">Firmware Write Flash</a></td>
  <td><code>0xf1</code></td>
  <td><code>MOSI_WRITE_FLASH</code></td>
- <td>–</td>
+ <td><a href="commands.md#miso-ack">ACK</a>, <a href="commands.md#miso-error">Error</a></td>
  <td>address</td>
 </tr>
 <tr>

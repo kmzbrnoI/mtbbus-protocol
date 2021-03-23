@@ -168,7 +168,7 @@ MTBbus commands
 * N.o. data bytes: *any*.
 * Data bytes are specific for specific module types.
 * Standard abbreviation: `MOSI_WRITE_FLASH`.
-* Response: no response.
+* Response: [*ACK*](#miso-ack) or [*Error*](#miso-error) *Bad Address*.
 
 ### `0xF2` Firmware Write Flash Status Request <a name="mosi-write-flash-status-req"></a>
 
@@ -214,6 +214,7 @@ MTBbus commands
 * Data byte 0 = error code:
   - `0x01` = unknown command (`ERR_UNKNOWN_COMMAND`).
   - `0x02` = unsupported command (`ERR_UNSUPPORTED_COMMAND`).
+  - `0x03` = bad address (`ERR_BAD_ADDRESS`).
 
 ### `0x03` Module information <a name="miso-module-info"></a>
 
@@ -279,6 +280,4 @@ MTBbus commands
 * Data byte 0:
   - `0x00` Flash Written
   - `0x01` Writing flash
-  - `0x02` Received packet checksum error
-  - `0x03` Invalid memory address error
 * In response to: [*Firmware Write Flash Status Request*](#mosi-write-flash-status-req)
