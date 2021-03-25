@@ -34,7 +34,8 @@ State of each output is encoded in 1 byte:
 
 ## Configuration
 
-Configuration consists of 24 bytes:
+Configuration consists of 24 bytes for module `0x15` & `0x16` (MTB-UNI v4) and
+26 bytes for module `0x10` (MTB-UNI v2). First `24` bytes are same.
 
 1. 16 bytes of safe outputs state (outputs indexed in order 0 to 15).
 2. 8 bytes of input keep delay.
@@ -43,6 +44,10 @@ Configuration consists of 24 bytes:
    - ...
    Each input has 16 values of input delay. `0`=0.0s, `1`=0.1s, `2`=0.2s, ...,
    `15`=1.5s.
+3. For MTB-UNI v2 only: 2 bytes encoding inputs on which IR sensors should be
+   used.
+   - Byte 24: IR active on inputs `0bFEDCBA98`.
+   - Byte 25: IR active on inputs `0b76543210`.
 
 When input goes to logical 0, it must remain in this state for *input keep
 delay* to consider the input as logical 0. Only after the time input changed
