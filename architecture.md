@@ -66,7 +66,7 @@ Byte*. All bytes in packet from slave modules have 9. bit = 0.
 * CRC-bytes: least significant byte is transmitted first.
 * Checksum includes whole packet: starting from *address byte* to last byte of
   *data bytes*.
-* Example of packet: TODO.
+* Example of packet: `0x101 0x001 0x001 0x091 0x090`.
 
 ## Modules addressing
 
