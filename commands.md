@@ -167,6 +167,7 @@ MTBbus commands
 * Command Code byte: `0xF1`.
 * N.o. data bytes: *any*.
 * Data bytes are specific for specific module types.
+  - Typical content: address & 64 bytes of data.
 * Standard abbreviation: `MOSI_WRITE_FLASH`.
 * Response: [*ACK*](#miso-ack) or [*Error*](#miso-error) *Bad Address*.
 
@@ -276,8 +277,11 @@ MTBbus commands
 * Report state of writing new firmware to flash.
 * Command Code byte: `0xF2`.
 * Standard abbreviation: `MISO_WRITE_FLASH_STATUS`.
-* N.o. data bytes: 1.
+* N.o. data bytes: *any*.
 * Data byte 0:
-  - `0x00` Flash Written
-  - `0x01` Writing flash
+  - `0x00` Flash Written (master can send next [Firmware Write Flash](#mosi-write-flash) command).
+  - `0x01` Writing flash (master can not send next [Firmware Write Flash](#mosi-write-flash) command).
+* Next data bytes contains address of written flash. Address format is specific
+  for specific modules.
+  - Typically 2 data bytes.
 * In response to: [*Firmware Write Flash Status Request*](#mosi-write-flash-status-req)

@@ -84,3 +84,31 @@ Slave → master:
 * *Input State*: n.o. data bytes: 2. Full state of inputs is sent.
 * *Output Set*: n.o. data bytes: variable. Same data bytes as in message *Set
   Output* is sent.
+
+### Firmware upgrade
+
+Data is sent in frames of 64 bytes.
+
+* *Firmware Write Flash*
+  - Data byte 0: page address.
+  - Data byte 1: offset in page.
+  - Data byte 2–65: memory data.
+
+* *Firmware Write Flash Status*
+  - Data byte 1: page address.
+  - Data byte 2: offset in page.
+
+For module type `0x10` (MTB-UNI v2 with ATmega328p), page size is 128 bytes.
+Thus, for single page write 2 *Firmware Write Flash* commands must be sent:
+
+ 1. `0x01 0x43 0xF1 0x00 0x00 [64 bytes of data]`
+ 2. `0x01 0x43 0xF1 0x00 0x40 [64 bytes of data]`
+
+For module type `0x15`& `0x16` (MTB-UNI v4 with ATmega128), page size is 256
+bytes. Thus, for single page write 4 *Firmware Write Flash* commands must be
+sent:
+
+ 1. `0x01 0x43 0xF1 0x00 0x00 [64 bytes of data] [checksum]`
+ 2. `0x01 0x43 0xF1 0x00 0x40 [64 bytes of data] [checksum]`
+ 3. `0x01 0x43 0xF1 0x00 0x80 [64 bytes of data] [checksum]`
+ 4. `0x01 0x43 0xF1 0x00 0xC0 [64 bytes of data] [checksum]`
