@@ -1,7 +1,13 @@
 MTB-UNI Module
 ==============
 
-Specification for modules `0x10` & `0x15`.
+This specification applies for module types listed below:
+
+| Code   | Module type                                     |
+|--------|-------------------------------------------------|
+| `0x10` | MTB-UNI v2 with ATmega328p                      |
+| `0x15` | MTB-UNI v4.0 with ATmega128 (without blue LED)  |
+| `0x16` | MTB-UNI v4.2 with ATmega128 (with blue LED)     |
 
 MTB-UNI module is most used MTBbus modules. It contains 16 digital inputs and
 16 digital outputs. Any output is capable of S-COM protocol transmission as
