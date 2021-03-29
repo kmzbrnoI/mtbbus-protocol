@@ -79,6 +79,10 @@ Master → slave:
   - Data byte 0: first byte flash address high.
   - Data byte 1: first byte flash address low.
   - Data byte 2–65: 64 bytes of memory data.
+* *Module-specific command*
+  - Data byte 0 = `0x01` = set if module supports IR sensors.
+    - Data byte 1: `0x00` = no, `0x01` = yes, `0xFF` = autodetect.
+    - This command is available for modules v2 only (code `0x01`, `0x02`).
 
 Slave → master:
 
