@@ -96,6 +96,13 @@
  <td>address</td>
 </tr>
 <tr>
+ <td><a href="commands.md#mosi-modules-specific">Module-specific command</a></td>
+ <td><code>0xfe</code></td>
+ <td><code>MOSI_SPECIFIC</code></td>
+ <td>–</td>
+ <td>address, broadcast</td>
+</tr>
+<tr>
  <td><a href="commands.md#mosi-reboot">Reboot</a></td>
  <td><code>0xff</code></td>
  <td><code>MOSI_REBOOT</code></td>
@@ -148,5 +155,10 @@
  <td><a href="commands.md#miso-write-flash-status">Firmware Write Flash Status</a></td>
  <td><code>0xf2</code></td>
  <td><code>MISO_WRITE_FLASH_STATUS</code></td>
+</tr>
+<tr>
+ <td><a href="commands.md#miso-modules-specific">Module-specific command</a></td>
+ <td><code>0xfe</code></td>
+ <td><code>MISO_SPECIFIC</code></td>
 </tr>
 </table>

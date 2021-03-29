@@ -181,6 +181,18 @@ MTBbus commands
 * Standard abbreviation: `MOSI_WRITE_FLASH_STATUS_REQ`.
 * Response: [*Firmware Write Flash Status*](#miso-write-flash-status).
 
+### `0xFE` Module-specific command <a name="mosi-modules-specific"></a>
+
+* This command packs any module-type specific commands. Each module type can
+  use this command to extend MTBbus protocol by any means.
+* Command type: for specific module only or broadcast.
+* Command Code byte: `0xFE`.
+* N.o. data bytes: *any*.
+* Standard abbreviation: `MOSI_SPECIFIC`.
+* Response: defined for specific modules, typically:
+  - [*Module-specific command*](#miso-module-specific)
+  - [*ACK*](#miso-ack)
+
 ### `0xFF` Reboot <a name="mosi-reboot"></a>
 
 * This command instructs slave module to reboot.
@@ -285,3 +297,12 @@ MTBbus commands
   for specific modules.
   - Typically 2 data bytes.
 * In response to: [*Firmware Write Flash Status Request*](#mosi-write-flash-status-req)
+
+### `0xFE` Module-specific command <a name="miso-modules-specific"></a>
+
+* This command packs any module-type specific commands. Each module type can
+  use this command to extend MTBbus protocol by any means.
+* Command Code byte: `0xFE`.
+* Standard abbreviation: `MISO_SPECIFIC`.
+* N.o. data bytes: *any*.
+* In response to: [*Module-specific command*](#mosi-module-specific)
