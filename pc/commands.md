@@ -76,10 +76,11 @@ MTB-USB to PC Commands
 * Tell PC that error occurred while processing command for MTB-USB module.
 * Command Code byte: `0x02`.
 * Standard abbreviation: `MTBUSB_MP_ERROR`.
-* N.o. data bytes: 2.
+* N.o. data bytes: 3.
   - Data byte 1: error code:
     - `0x01` *No response from slave module*
   - Data byte 2: *Command code byte* of command for which error is generated.
+  - Data byte 3: slave address.
 * In response to:
   - [Forward packet to MTBbus](pm-forward)
 
