@@ -101,14 +101,15 @@ MTB-USB to PC Commands
 * Report general information about MTB-USB.
 * Command Code byte: `0x20`.
 * Standard abbreviation: `MTBUSB_MP_INFO`.
-* N.o. data bytes: TODO.
+* N.o. data bytes: 0.
 * In response to: [*MTB-USB Information Request*](#pm-info).
 
 #### Module information packet bytes
 
  0. Module type
     - `0x01` MTB-USB module designed by Jan Horacek
- 1. Module flags TODO
+ 1. Module flags
+    - Bits 0,1: current MTBbus speed.
  2. Firmware version major
  3. Firmware version minor
  4. Supported protocol version major
