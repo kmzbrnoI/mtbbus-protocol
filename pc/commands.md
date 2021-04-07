@@ -141,6 +141,8 @@ MTB-USB to PC Commands
 * Inform PC that active module stopped responding to MTBbus *Module Inquiry*.
 * Command Code byte: `0x24`.
 * Standard abbreviation: `MTBUSB_MP_MODULE_FAILED`.
-* N.o. data bytes: 1.
+* N.o. data bytes: 2.
   - Data byte 0: slave module address.
+  - Data byte 0: number of remaining attempts.
+    - 0 = module failed.
 * In response to: nothing, could be sent anytime.
