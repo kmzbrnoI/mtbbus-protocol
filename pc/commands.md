@@ -91,9 +91,11 @@ MTB-USB to PC Commands
 * Command Code byte: `0x10`.
 * Standard abbreviation: `MTBUSB_MP_FORWARD`.
 * N.o. data bytes: any.
-  - Data byte 0: MTBbus slave device address.
-  - Data byte 1: MTBbus MTBbus *Command Code Byte*.
-  - Data byte 2–n: MTBbus *Data bytes*.
+  - Data byte 0: number of attempts command was resent till this answer came.
+    For asynchornous module responses 0.
+  - Data byte 1: MTBbus slave device address.
+  - Data byte 2: MTBbus MTBbus *Command Code Byte*.
+  - Data byte 3–n: MTBbus *Data bytes*.
 * Checksum of MTBbus packet is omitted (USB calculates checksums automatically).
 * In response to: nothing, could be sent anytime.
 
