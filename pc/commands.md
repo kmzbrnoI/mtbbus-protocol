@@ -79,6 +79,8 @@ MTB-USB to PC Commands
 * N.o. data bytes: 3.
   - Data byte 1: error code:
     - `0x01` *No response from slave module*
+    - `0x02` *Cannot add incoming command to USB → MTBbus buffer, buffer does
+             have enough free space*
   - Data byte 2: *Command code byte* of command for which error is generated.
   - Data byte 3: slave address.
 * In response to:
