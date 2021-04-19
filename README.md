@@ -1,12 +1,6 @@
 MTBbus v4.0 Protocol Specification
 ==================================
 
----
-
-**Content of this repository is under construction.**
-
----
-
 MTBbus is RS485-based communication bus for controlling general-purpose IO
 modules. It's original aim is to control model railroad accessories (e.g.
 turnouts, signals etc.) however the bus is designed generally and extendably.
