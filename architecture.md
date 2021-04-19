@@ -38,7 +38,7 @@ to communicate fast and to detect new modules too.
 ## Timing
 
 Each slave module must start answering to any request addresses to the module
-after ≤ 110 microseconds. After 120 microseconds master module is allowed to
+after ≤ 200 microseconds. After 250 microseconds master module is allowed to
 consider addressed module as non-communicating.
 
 ## Packet structure
