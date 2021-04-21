@@ -122,3 +122,8 @@ sent:
  2. `0x01 0x43 0xF1 0x00 0x40 [64 bytes of data] [checksum]`
  3. `0x01 0x43 0xF1 0x00 0x80 [64 bytes of data] [checksum]`
  4. `0x01 0x43 0xF1 0x00 0xC0 [64 bytes of data] [checksum]`
+
+Upgrade is done page-based. Frames in page need to be received in-order.
+Page is written when last frame of page is received. It is impossible to write
+just part of the page. In case when part of the page is supposed to be written,
+rest of the page must be padded.
