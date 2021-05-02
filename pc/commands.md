@@ -58,6 +58,13 @@ MTB-USB to PC Commands
 * N.o. data bytes: 0.
 * Response: [*Active modules list*](#mp-active-modules-list).
 
+### `0x30` Ping <a name="pm-ping"></a>
+
+* Ping MTB-USB module to check its availability.
+* Command Code byte: `0x30`.
+* Standard abbreviation: `MTBUSB_PM_PING`.
+* N.o. data bytes: 0.
+* Response: [*ACK*](#mp-ack).
 
 ## MTB-USB → PC <a name="mtbtopc"></a>
 
