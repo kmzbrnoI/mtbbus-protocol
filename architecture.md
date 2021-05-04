@@ -9,7 +9,7 @@ MTBbus Architecture
 * Stop bits: 1.
 * Parity: None.
 * Max bus length: 100 m.
-* Max modules: 254.
+* Max modules: 255.
 
 ## Hardware Structure
 
