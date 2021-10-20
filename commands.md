@@ -260,6 +260,11 @@ MTBbus commands
  3. Firmware version minor
  4. Supported protocol version major
  5. Supported protocol version minor
+ 6. Bootloader version major
+ 7. Bootloader version minor
+
+If module is in bootloader, firmware version = bootloader version or bootloader
+does not have to be reported (packet can contain 6 bytes only).
 
 ### `0x04` Module Configuration <a name="miso-config"></a>
 
