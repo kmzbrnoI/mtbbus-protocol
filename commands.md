@@ -243,6 +243,8 @@ MTBbus commands
  1. Module flags
     - bit 0: module is intentionally in bootloader ready for firmware upgrade
     - bit 1: module is unintentionally in bootloader, memory checksum failed
+    - bit 2: module in warning state
+    - bit 3: module in error state
  2. Firmware version major
  3. Firmware version minor
  4. Supported protocol version major
