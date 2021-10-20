@@ -127,3 +127,14 @@ Upgrade is done page-based. Frames in page need to be received in-order.
 Page is written when last frame of page is received. It is impossible to write
 just part of the page. In case when part of the page is supposed to be written,
 rest of the page must be padded.
+
+## Diagnostic information
+
+* N.o. data bytes: 2
+* Data byte 0: number of error bytes = 0.
+* Data byte 1: warning 0
+  - `b0`: Reset due to external signal.
+  - `b1`: Reset due to brown-out.
+  - `b2`: Reset due to watchdog overflow.
+  - `b3`: `0`
+  - `b4`: Timer miss occurred.
