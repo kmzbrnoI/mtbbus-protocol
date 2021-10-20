@@ -129,6 +129,15 @@ MTBbus commands
 * Response: [*ACK*](#miso-ack) or [*Error*](#miso-error) *Unsupported command*.
   - When command is sent as broadcast, no response should be sent.
 
+### `0xD0` Diagnostic Info Request <a name="mosi-diag-info-req"></a>
+
+* Report state of internal module diagnostics.
+* Command type: for specific module only.
+* Command Code byte: `0xD0`.
+* Standard abbreviation: `MOSI_DIAG_INFO_REQ`.
+* N.o. data bytes: 0.
+* Response: [*Module Diagnostic Info*](#miso-diag-info).
+
 ### `0xE0` Change Speed <a name="mosi-speed-changed"></a>
 
 * Bus speed change announcement.
@@ -285,6 +294,20 @@ MTBbus commands
 * Standard abbreviation: `MISO_OUTPUT_SET`.
 * N.o. data bytes: *any*.
 * In response to: [*Set Output*](#mosi-set-output)
+
+### `0xD0` Module Diagnostic Info <a name="miso-diag-info"></a>
+
+* Report state of internal module diagnostics.
+  - Packet contains bit for each error & warning module could be in.
+  - Error bits & warning bits are separated so anyone can check whether the
+    module is in error or warning state without knowledge of meaning of each
+    specific bit.
+  - Packet usually contains how many bytes are error, rest is warning.
+  - Content of the packet is specific for specific module types.
+* Command Code byte: `0xD0`.
+* Standard abbreviation: `MISO_DIAG_INFO`.
+* N.o. data bytes: *any*.
+* In response to: [*Diagnostic Info Request*](#mosi-diag-info-req)
 
 ### `0xF2` Firmware Write Flash Status <a name="miso-write-flash-status"></a>
 

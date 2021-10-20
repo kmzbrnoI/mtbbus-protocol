@@ -68,6 +68,13 @@
  <td>address, broadcast</td>
 </tr>
 <tr>
+ <td><a href="commands.md#mosi-diag-info-req">Diagnostic Info Request</a></td>
+ <td><code>0xd0</code></td>
+ <td><code>MOSI_DIAG_INFO_REQ</code></td>
+ <td><a href="commands.md#miso-diag-info">Module Diagnostic Info</a></td>
+ <td>address</td>
+</tr>
+<tr>
  <td><a href="commands.md#mosi-speed-changed">Change Speed</a></td>
  <td><code>0xe0</code></td>
  <td><code>MOSI_CHANGE_SPEED</code></td>
@@ -150,6 +157,11 @@
  <td><a href="commands.md#miso-output-set">Output Set</a></td>
  <td><code>0x12</code></td>
  <td><code>MISO_OUTPUT_SET</code></td>
+</tr>
+<tr>
+ <td><a href="commands.md#miso-diag-info">Module Diagnostic Info</a></td>
+ <td><code>0xd0</code></td>
+ <td><code>MISO_DIAG_INFO</code></td>
 </tr>
 <tr>
  <td><a href="commands.md#miso-write-flash-status">Firmware Write Flash Status</a></td>
