@@ -8,7 +8,7 @@
  <td><a href="commands.md#mosi-module-inquiry">Module Inquiry</a></td>
  <td><code>0x1</code></td>
  <td><code>MOSI_MODULE_INQUIRY</code></td>
- <td><a href="commands.md#miso-ack">ACK</a>, <a href="commands.md#miso-input-changed">Input Changed</a></td>
+ <td><a href="commands.md#miso-ack">ACK</a>, <a href="commands.md#miso-input-changed">Input Changed</a>, <a href="commands.md#miso-diag-info">Module Diagnostic Info</a></td>
  <td>address</td>
 </tr>
 <tr>
