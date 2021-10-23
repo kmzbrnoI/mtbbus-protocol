@@ -66,6 +66,15 @@ MTB-USB to PC Commands
 * N.o. data bytes: 0.
 * Response: [*ACK*](#mp-ack).
 
+### `0x31` Reboot to bootloader <a name="pm-reboot-bootloader"></a>
+
+* Reboot MTB-USB to bootloader with DFU to prepare for firmware upgrade.
+* Command Code byte: `0x31`.
+* Standard abbreviation: `MTBUSB_PM_REBOOT_BOOTLOADER`.
+* N.o. data bytes: 0.
+* Response: no response, USB device is lost.
+
+
 ## MTB-USB → PC <a name="mtbtopc"></a>
 
 ### `0x01` Acknowledgement <a name="mp-ack"></a>
