@@ -1,5 +1,10 @@
 # MTBbus Changelog
 
+## v4.1
+
+* Add module diagnostics.
+* Module reports bootloader version.
+
 ## v4.0
 
 Changes from [version 2.0](https://mtb.kmz-brno.cz/assets/pdf/mtb-protok20.pdf)

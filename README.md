@@ -1,4 +1,4 @@
-MTBbus v4.0 Protocol Specification
+MTBbus v4.1 Protocol Specification
 ==================================
 
 MTBbus is RS485-based communication bus for controlling general-purpose IO
