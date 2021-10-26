@@ -16,6 +16,7 @@ must also be described. This protocol is available [here](pc).
 
 1. [MTBbus goals](goals.md)
 2. [MTBbus Architecture](architecture.md)
+   - [Module Diagnostics](diag.md)
 3. [Commands](commands.md)
    - [Module types](module-types.md)
    - [Commands summary](commands-summary.md)

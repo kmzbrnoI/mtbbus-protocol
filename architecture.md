@@ -1,6 +1,10 @@
 MTBbus Architecture
 ===================
 
+Purpose of MTBbus is to connect general IO modules to the computer. Each module
+monitors its inputs and sends computer information when inputs are changed.
+Computer can instruct modules to set outputs.
+
 ## Basic Bus Parameters
 
 * Hardware layer: RS485, 2-wire communication (+ common ground).
@@ -78,3 +82,5 @@ module/PC.
 ## Errors
 
 If slave module receives bad checksum, it must not respond.
+
+## [Diagnostics](diag.md)
