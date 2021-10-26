@@ -130,11 +130,6 @@ rest of the page must be padded.
 
 ## Diagnostic information
 
-* N.o. data bytes: 2
-* Data byte 0: number of error bytes = 0.
-* Data byte 1: warning 0
-  - `b0`: Reset due to external signal.
-  - `b1`: Reset due to brown-out.
-  - `b2`: Reset due to watchdog overflow.
-  - `b3`: `0`
-  - `b4`: Timer miss occurred.
+Module reports no errors.
+
+Module reports [common warnings](../diag.md) only.

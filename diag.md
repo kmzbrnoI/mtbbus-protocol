@@ -36,6 +36,15 @@ There are some common DVs:
 
 `13–255`: *not used*
 
+## Common warning value
+
+Common warning contains only one byte: `0b000m0wbe`.
+
+* `e`: Reset due to external signal.
+* `b`: Reset due to brown-out.
+* `w`: Reset due to watchdog overflow.
+* `m`: Timer miss occurred.
+
 ## Notes
 
 * If module is asked to return state of *not used* DV, it returns empty DV.

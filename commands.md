@@ -21,12 +21,12 @@ MTBbus commands
      If this bit is 0, slave module should always respond only with
      [`ACK`](#miso-ack). In this case, modules are polled for their input
      status.
-* Response: [*ACK*](#miso-ack) or [*Input Changed*](#miso-input-changed) or [*Module Diagnostic Info*](#miso-diag-info).
+* Response: [*ACK*](#miso-ack) or [*Input Changed*](#miso-input-changed) or [*Module Diagnostic Value*](#miso-diag-value).
    - [*ACK*](#miso-ack) if module has no data to send.
    - [*Input Changed*](#miso-input-changed) if module wants to report input
      changed event.
-   - [*Module Diagnostic Info*](#miso-diag-info) if module's diagnostic info
-     changed – e.g. error occured / disappeared.
+   - [*Module Diagnostic Value*](#miso-diag-value) if module's diagnostic value #1
+     changed – error/warning occured / disappeared.
 
 ### `0x02` Module Information Request <a name="mosi-info"></a>
 
@@ -126,19 +126,20 @@ MTBbus commands
     by on-board button press should change address.
 * Command Code byte: `0x20`.
 * N.o. data bytes: 1.
-* Standard abbreviation: `MOSI_CHANGE_ADDR`.
 * Data byte 0: new module address.
+* Standard abbreviation: `MOSI_CHANGE_ADDR`.
 * Response: [*ACK*](#miso-ack) or [*Error*](#miso-error) *Unsupported command*.
   - When command is sent as broadcast, no response should be sent.
 
-### `0xD0` Diagnostic Info Request <a name="mosi-diag-info-req"></a>
+### `0xD0` Diagnostic Value Request <a name="mosi-diag-value-req"></a>
 
-* Report state of internal module diagnostics.
+* PC instruct module to return some [diagnostic value](diag.md).
 * Command type: for specific module only.
 * Command Code byte: `0xD0`.
-* Standard abbreviation: `MOSI_DIAG_INFO_REQ`.
-* N.o. data bytes: 0.
-* Response: [*Module Diagnostic Info*](#miso-diag-info).
+* Standard abbreviation: `MOSI_DIAG_VALUE_REQ`.
+* N.o. data bytes: 1.
+* Data byte 0: index of requested DV.
+* Response: [*Module Diagnostic Value*](#miso-diag-value).
 
 ### `0xE0` Change Speed <a name="mosi-speed-changed"></a>
 
@@ -302,19 +303,15 @@ does not have to be reported (packet can contain 6 bytes only).
 * N.o. data bytes: *any*.
 * In response to: [*Set Output*](#mosi-set-output)
 
-### `0xD0` Module Diagnostic Info <a name="miso-diag-info"></a>
+### `0xD0` Module Diagnostic Value <a name="miso-diag-value"></a>
 
-* Report state of internal module diagnostics.
-  - Packet contains bit for each error & warning module could be in.
-  - Error bits & warning bits are separated so anyone can check whether the
-    module is in error or warning state without knowledge of meaning of each
-    specific bit.
-  - Packet usually contains how many bytes are error, rest is warning.
-  - Content of the packet is specific for specific module types.
+* Report state of [DV](diag.md).
 * Command Code byte: `0xD0`.
-* Standard abbreviation: `MISO_DIAG_INFO`.
+* Standard abbreviation: `MISO_DIAG_VALUE`.
 * N.o. data bytes: *any*.
-* In response to: [*Diagnostic Info Request*](#mosi-diag-info-req)
+  - Data byte 0: DV index.
+  - Data bytes 1–n: DV.
+* In response to: [*Diagnostic Value Request*](#mosi-diag-value-req)
 
 ### `0xF2` Firmware Write Flash Status <a name="miso-write-flash-status"></a>
 
