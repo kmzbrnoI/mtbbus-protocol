@@ -34,7 +34,11 @@ There are some common DVs:
  * Length: specific for module type
  * Representation: specific for module type
 
-`13–255`: *not used*
+`13`: CPU temperature
+ * Length: specific for module type
+ * Representation: specific for module type
+
+`14–255`: *not used*
 
 ## Common warning value
 
