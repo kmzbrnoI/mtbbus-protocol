@@ -38,12 +38,13 @@ There are some common DVs:
 
 ## Common warning value
 
-Common warning contains only one byte: `0b000m0wbe`.
+Common warning contains only one byte: `0b00om0wbe`.
 
 * `e`: Reset due to external signal.
 * `b`: Reset due to brown-out.
 * `w`: Reset due to watchdog overflow.
 * `m`: Timer miss occurred.
+* `o`: MCU VCC is oscillating.
 
 ## Notes
 
