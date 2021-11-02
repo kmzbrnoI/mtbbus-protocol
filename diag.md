@@ -18,7 +18,11 @@ There are some common DVs:
    - `w` = any warning present
    - `e` = any error present
 
-`2–9`: *not used*
+`2`: uptime
+ * Length: 4 bytes
+ * Unit: seconds
+
+`3–9`: *not used*
 
 `10`: errors
  * Length: any
