@@ -12,6 +12,7 @@ MTBbus module type is determined by its 1-byte *code*.
 | `0x20` | MTB-BOOST                                       |
 | `0x30` | MTB-RAILCOM                                     |
 | `0x40` | MTB-CROS                                        |
+| `0x50` | MTB-UNIS with ATmega128 and 6 servo outputs     |
 
 Note: this table must contain entry for each hardware revision of single module
 type if this revision affects uploaded firmware. Module type must fully qualify
