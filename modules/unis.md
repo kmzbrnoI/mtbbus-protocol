@@ -32,9 +32,9 @@ State of each output is encoded in 1 byte:
 
 ## Configuration
 
-Configuration consists of 55 bytes. First `24` bytes are same as in MTB-UNI module.
+Configuration consists of 67 bytes. 
 
-1. 16 bytes of safe outputs state (outputs indexed in order 0 to 15).
+1. 28 bytes of safe outputs state (outputs indexed in order 27 to 0).
 2. 8 bytes of input keep delay.
    - Byte 0: `0bBBBBAAAA`. `A` = delay of input 0, `B` = delay of input 1.
    - Byte 1: delay of input 2, delay of input 3.
@@ -44,9 +44,9 @@ Configuration consists of 55 bytes. First `24` bytes are same as in MTB-UNI modu
 3. 1 byte mask, which servo outputs are active
    - `0b00654321`, 1 = output active, 0 = output disabled
 4. 24 bytes for servo positions
-   - 2 byte value for servo 1 position 1
-   - 2 byte value for servo 1 position 2
-   - 2 byte value for servo 2 position 1
+   - 2 byte value for servo 1 position 1 (MSB, LSB)
+   - 2 byte value for servo 1 position 2 (MSB, LSB)
+   - 2 byte value for servo 2 position 1 (MSB, LSB)
    - ...
 5. 6 bytes for servo speed
    - speed for servo 1
@@ -61,23 +61,25 @@ event is reported to master board.
 
 Master → slave:
 
-* *Set Configuration*: n.o. data bytes: 55. Whole configuration is sent.
+* *Set Configuration*: n.o. data bytes: 67. Whole configuration is sent.
 * *Get Configuration*: n.o. data bytes: 0.
 * *Get Input*: n.o. data bytes: 0.
 * *Set Output*: n.o. data bytes: variable.
   - State of all outputs is always sent.
-  - Data byte 0: full state mask for outputs `0b00fedcba`.
-  - Data byte 1: full state mask for outputs `0bFEDCBA98`.
-  - Data byte 2: full state mask for outputs `0b76543210`.
-  - Data byte 3: binary state of outputs `0b00fedcba`.
+  - Data byte 0: full state mask for outputs `0bFEDCBA98`.
+  - Data byte 1: full state mask for outputs `0b76543210`.
+  - Data byte 2: binary state of outputs `0 0 0 0 s6p s6l s5p s5l`.
+  - Data byte 3: binary state of outputs `s4p s4l s3p s3l s2p s2l s1p s1l`.
   - Data byte 4: binary state of outputs `0bFEDCBA98`.
   - Data byte 5: binary state of outputs `0b76543210`.
   - Data byte 6–n: state of full-state outputs in order 0–F.
   - Examples (only data bytes are written):
-    - Set output 1 as active, other as inactive: `0x00 0x00 0x00 0x02`.
+    - Set output 1 as active, other as inactive: `0x00 0x00 0x00 0x00 0x00 0x02`.
     - Set output 8 to S-COM code `0x0A`, output 10 as flickering with period
       2 Hz, output 15 as active, other as inactive:
-      `0x05 0x00 0xF0 0x00 0x42 0x8A`.
+      `0x05 0x00 0x00 0x00 0x80 0x00 0x42 0x8A`.
+    - Set output 4,s1l,s2l active other inactive
+      `0x00 0x00 0x00 0x05 0x00 0x10`.
   - Bits in *binary state output* which are masked by *full state mask* can
     contain any value. This value is ignored.
 * *Firmware Write Flash*
@@ -86,16 +88,16 @@ Master → slave:
   - Data byte 2–65: 64 bytes of memory data.
 * *Module-specific command*
   - Data byte 0 = `0x01` = set servo position.
-    - Data byte 1 = position identification `0b0nnn000p` where p = position, n = servo number
-    - Data byte 2 + byte 3 = new position for servo
+    - Data byte 1 = position identification `0b0000nnnp` where p = position, n = servo number
+    - Data byte 2 + byte 3 = new position for servo (byte 2 = MSB, byte 3 = LSB)
     (p = position  - 0=1st position, 1=2nd position, n = servo number - possible values 1-6)
   - Data byte 0 = `0x02` = set servo speed.
-    - Data byte 1 = position identification `0b0nnn000p` where p = position, n = servo number
-    - Data byte 2 + byte 3: new speed for servo.
+    - Data byte 1 = position identification `0b0000nnnp` where p = position, n = servo number
+    - Data byte 2: new speed for servo (valid range 1-255).
     (p = position  - 0=1st position, 1=2nd position, n = servo number - possible values 1-6)
   - Data byte 0 = `0x03` = manual setting of servo position (changes will not be saved to eeprom).
-    - Data byte 1 = position identification `0b0nnn0000` where n = servo number (1-6)
-    - Data byte 2 + byte 3: new position for servo.
+    - Data byte 1 = position identification `0b0000nnnx` where n = servo number (1-6), x = ignored
+    - Data byte 2 + byte 3: new position for servo (byte 2 = MSB, byte 3 = LSB).
     servo immediately move to new position, ignore state of virtual outputs for servo
     after inactivity ~1 minute, servo move to its original position - defined in eeprom and virtual outputs state
   - Data byte 0 = `0x03` = manual setting of servo position (changes will not be saved to eeprom).
@@ -106,11 +108,10 @@ Master → slave:
 
 Slave → master:
 
-* *Module Configuration*: n.o. data bytes: 55. Whole configuration is sent.
+* *Module Configuration*: n.o. data bytes: 67. Whole configuration is sent.
 * *Input Changed*: n.o. data bytes: 2. Full state of inputs is sent.
   - Data byte 0: inputs `0bFEDCBA98`.
   - Data byte 1: inputs `0b76543210`.
-  - Order of inputs in byte: `0b76543210`.
 * *Input State*: n.o. data bytes: 2. Full state of inputs is sent.
 * *Output Set*: n.o. data bytes: variable. Same data bytes as in message *Set
   Output* is sent.
