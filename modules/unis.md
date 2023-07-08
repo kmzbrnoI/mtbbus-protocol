@@ -1,4 +1,4 @@
-MTB-UNI Module
+MTB-UNIS Module
 ==============
 
 This specification applies for module types listed below:
@@ -7,9 +7,10 @@ This specification applies for module types listed below:
 |--------|-------------------------------------------------|
 | `0x50` | MTB-UNIS with ATmega128 and 6 servo outputs     |
 
-MTB-UNIS module is much like MTB-UNI modules. It contains 16 digital inputs and
-16 digital outputs, and 6 servo outputs. Any of 16 digital output is capable of S-COM protocol
-transmission as well as flickering. Servo is controlled via aditional 12 virtual outputs
+MTB-UNIS module is like MTB-UNI modules. It contains 16 digital inputs and
+16 digital outputs. But have extra 6 servo outputs. Any of 16 digital output is capable of S-COM protocol
+transmission as well as flickering. Servo is controlled via aditional 12 virtual outputs.
+Thus module have 16 iput signals and 28 output signals.
 
 ## Outputs state
 
@@ -32,7 +33,7 @@ State of each output is encoded in 1 byte:
 
 ## Configuration
 
-Configuration consists of 67 bytes. 
+Configuration consists of 55 bytes.
 
 1. 28 bytes of safe outputs state (outputs indexed in order 27 to 0).
 2. 8 bytes of input keep delay.
@@ -43,15 +44,21 @@ Configuration consists of 67 bytes.
    `15`=1.5s.
 3. 1 byte mask, which servo outputs are active
    - `0b00654321`, 1 = output active, 0 = output disabled
-4. 24 bytes for servo positions
-   - 2 byte value for servo 1 position 1 (MSB, LSB)
-   - 2 byte value for servo 1 position 2 (MSB, LSB)
-   - 2 byte value for servo 2 position 1 (MSB, LSB)
+4. 12 bytes for servo positions
+   - 1 byte value for servo 1 position 1
+   - 1 byte value for servo 1 position 2
+   - 1 byte value for servo 2 position 1
    - ...
+   Valid range is 0 - 255.
+   Value 0 means servo pulse 399 us.
+   Value 255 means servo pulse 2613 us.
+   Value 127 means servo pulse 1502 us - center position.
+   Recomanded limits for pulse duration is 500 - 2500 us.
 5. 6 bytes for servo speed
    - speed for servo 1
    - speed for servo 2
    - ...
+   Speed 1 is slowest (1.56 positions/second). Speed 255 is fastest (797 positions/second).
    
 When input goes to logical 0, it must remain in this state for *input keep
 delay* to consider the input as logical 0. Only after the time input changed
@@ -89,18 +96,18 @@ Master → slave:
 * *Module-specific command*
   - Data byte 0 = `0x01` = set servo position.
     - Data byte 1 = position identification `0b0000nnnp` where p = position, n = servo number
-    - Data byte 2 + byte 3 = new position for servo (byte 2 = MSB, byte 3 = LSB)
+    - Data byte 2 = new position for servo (0-255)
     (p = position  - 0=1st position, 1=2nd position, n = servo number - possible values 1-6)
   - Data byte 0 = `0x02` = set servo speed.
     - Data byte 1 = position identification `0b0000nnnp` where p = position, n = servo number
     - Data byte 2: new speed for servo (valid range 1-255).
     (p = position  - 0=1st position, 1=2nd position, n = servo number - possible values 1-6)
-  - Data byte 0 = `0x03` = manual setting of servo position (changes will not be saved to eeprom).
+  - Data byte 0 = `0x03` = manual servo positioning (changes will not be saved to eeprom).
     - Data byte 1 = position identification `0b0000nnnx` where n = servo number (1-6), x = ignored
-    - Data byte 2 + byte 3: new position for servo (byte 2 = MSB, byte 3 = LSB).
-    servo immediately move to new position, ignore state of virtual outputs for servo
-    after inactivity ~1 minute, servo move to its original position - defined in eeprom and virtual outputs state
-  - Data byte 0 = `0x03` = manual setting of servo position (changes will not be saved to eeprom).
+    - Data byte 2: new position for servo (0-255).
+    servo move to new position using speed from settings, ignore state of virtual outputs for servo
+    after inactivity period (2 minutes), servo move to its original position - defined in eeprom and virtual outputs state
+  - Data byte 0 = `0x03`.
     - Data byte 1 = 0 - end of manual position setting, all servos restore normal operation
   
   Manual servo positioning is for testing. No changes will be saved to internal eeprom.
