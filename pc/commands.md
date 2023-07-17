@@ -129,7 +129,7 @@ MTB-USB to PC Commands
  0. Module type
     - `0x01` MTB-USB module designed by Jan Horacek
  1. Module flags
-    - Bits 0,1: current MTBbus speed.
+    - Bits 0,1,2,3: current MTBbus speed.
  2. Firmware version major
  3. Firmware version minor
  4. Supported protocol version major
