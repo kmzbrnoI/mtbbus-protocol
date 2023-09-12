@@ -7,10 +7,11 @@ This specification applies for module types listed below:
 |--------|-------------------------------------------------|
 | `0x50` | MTB-UNIS with ATmega128 and 6 servo outputs     |
 
-MTB-UNIS module is like MTB-UNI modules. It contains 16 digital inputs and
-16 digital outputs. But have extra 6 servo outputs. Any of 16 digital output is capable of S-COM protocol
-transmission as well as flickering. Servo is controlled via aditional 12 virtual outputs.
-Thus module have 16 iput signals and 28 output signals.
+MTB-UNIS module is like a MTB-UNI module. It contains 16 digital inputs and
+16 digital outputs, but it has extra 6 servo outputs. Any of 16 digital outputs
+is capable of S-COM protocol transmission as well as flickering. Servos are
+controlled via additional 12 virtual outputs. Thus, MTB-UNIs module has 16
+input signals and 28 output signals.
 
 ## Outputs state
 
@@ -42,24 +43,24 @@ Configuration consists of 55 bytes.
    - ...
    Each input has 16 values of input delay. `0`=0.0s, `1`=0.1s, `2`=0.2s, ...,
    `15`=1.5s.
-3. 1 byte mask, which servo outputs are active
+3. 1 byte mask indicating which servo outputs are active
    - `0b00654321`, 1 = output active, 0 = output disabled
 4. 12 bytes for servo positions
    - 1 byte value for servo 1 position 1
    - 1 byte value for servo 1 position 2
    - 1 byte value for servo 2 position 1
    - ...
-   Valid range is 0 - 255.
-   Value 0 means servo pulse 399 us.
-   Value 255 means servo pulse 2613 us.
-   Value 127 means servo pulse 1502 us - center position.
-   Recomanded limits for pulse duration is 500 - 2500 us.
+   Valid range is 0-255.
+   0 = servo pulse is 399 us.
+   255 = servo pulse 2613 us.
+   127 = servo pulse 1502 us (center position).
+   Recommended limits for pulse duration is 500 - 2500 us.
 5. 6 bytes for servo speed
    - speed for servo 1
    - speed for servo 2
    - ...
    Speed 1 is slowest (1.56 positions/second). Speed 255 is fastest (797 positions/second).
-   
+
 When input goes to logical 0, it must remain in this state for *input keep
 delay* to consider the input as logical 0. Only after the time input changed
 event is reported to master board.
@@ -109,7 +110,7 @@ Master → slave:
     after inactivity period (2 minutes), servo move to its original position - defined in eeprom and virtual outputs state
   - Data byte 0 = `0x03`.
     - Data byte 1 = 0 - end of manual position setting, all servos restore normal operation
-  
+
   Manual servo positioning is for testing. No changes will be saved to internal eeprom.
   Control application can save eeprom values via standard command *Set Configuration*  
 
