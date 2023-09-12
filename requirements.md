@@ -76,6 +76,20 @@ Požadavky na nový MTB protokol
      b. úroveň: 0b 0000 000x
      c. kmitání: 0b 0100 xxxx
 
+### MTB-UNIS
+
+ * Konfigurace:
+   - 16 bytů: typ výstupů + bezpečný stav
+   - 8 bytů: 16×4 bity: zpoždění vstupů per vstup po 0.1 s
+   - 1 byte: maska, jaké servovýstupy jsou aktivní (6 výstupů)
+   - 24 bytů: 6x2x2 bytů koncové polohy serv (6 serv, 2 polohy, 2 byte na polohu)
+   - 6 bytů: rychlost serv
+ * Stav vstupů se vždy posílá celý (2 bytes)
+ * Stav výstupů: 1 byte:
+     a. S-COM 0b 1xxx xxxx
+     b. úroveň: 0b 0000 000x - i pro serva, simulují se 2 výstupy na servo
+     c. kmitání: 0b 0100 xxxx
+     
 ### MTB-SPAX
 
  * Vstupy:
