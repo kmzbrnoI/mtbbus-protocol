@@ -24,9 +24,7 @@ must also be described. This protocol is available [here](pc).
 5. Module-specific commands
    - [MTB-UNI](modules/uni.md)
    - [MTB-UNIS](modules/unis.md)
-   - MTB-BOOST
-   - MTB-RAILCOM
-   - MTB-CROS
+   - [MTB-RC](modules/rc.md)
 
 ## Changelog
 
