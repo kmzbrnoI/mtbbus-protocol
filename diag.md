@@ -42,7 +42,9 @@ There are some common DVs:
  * Length: specific for module type
  * Representation: specific for module type
 
-`14–255`: *not used*
+`14–31`: *not used*
+
+`32-255`: module-specific diagnostic values
 
 ## Common warning value
 
@@ -56,7 +58,7 @@ Common warning contains only one byte: `0b00om0wbe`.
 
 ## Notes
 
-* If module is asked to return state of *not used* DV, it returns empty DV.
+* If module is asked to return state of *unused* DV, it returns empty DV (length=0).
 * Module must store all diagnostics to be ready to return value of any DV immediately.
 * DVs are read-only from the point of view of PC.
 * Only changes of *DV #1* are reported as events to the PC. All other DVs should
