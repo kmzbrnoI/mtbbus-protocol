@@ -126,3 +126,17 @@ Module reports [common warnings](../diag.md) only.
 
 `55+10*t`: `APP_ID_ADR_HIGH` received in track `t`
  * Length: 4 bytes
+
+#### DCC
+
+`130`: DCC received packets
+ * Length: 4 bytes
+
+`131`: DCC received bad xor
+ * Length: 4 bytes
+
+`132`: logical 0 after <10 preamble bits
+ * Length: 4 bytes
+
+`133`: number of mobile decoders read addresses
+ * Length: 4 bytes
