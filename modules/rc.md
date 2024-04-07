@@ -62,3 +62,67 @@ TODO
 Module reports no errors.
 
 Module reports [common warnings](../diag.md) only.
+
+### Module-specific diagnostic values
+
+#### Railcom low-level
+
+`32`: Cutouts started
+ * Length: 4 bytes
+
+`33`: Cutouts finished
+ * Length: 4 bytes
+
+`34`: Cutout timeouts
+ * Length: 4 bytes
+
+`35`: Cutouts with data in channel 1
+ * Length: 4 bytes
+
+`36`: Cutouts with data in channel 2
+ * Length: 4 bytes
+
+`37`: Cutouts without ready\_to\_parse
+ * Length: 4 bytes
+
+
+#### Railcom middleware
+
+`40`: RailCom channel 1 control-sum invalid reads
+ * Length: 4 bytes
+
+`41`: RailCom channel 2 control-sum invalid reads
+ * Length: 4 bytes
+
+`42`: addr1\_received\_count resets
+ * Length: 4 bytes
+
+`43`: addr2\_received\_count resets
+ * Length: 4 bytes
+
+`44`: `APP_ID_ADR_LOW` received
+ * Length: 4 bytes
+
+`45`: `APP_ID_ADR_HIGH` received
+ * Length: 4 bytes
+
+
+`t` = track [0-7]
+
+`50+10*t`: RailCom channel 1 control-sum invalid reads in track `t`
+ * Length: 4 bytes
+
+`51+10*t`: RailCom channel 2 control-sum invalid reads in track `t`
+ * Length: 4 bytes
+
+`52+10*t`: addr1\_received\_count resets in track `t`
+ * Length: 4 bytes
+
+`53+10*t`: addr2\_received\_count resets in track `t`
+ * Length: 4 bytes
+
+`54+10*t`: `APP_ID_ADR_LOW` received in track `t`
+ * Length: 4 bytes
+
+`55+10*t`: `APP_ID_ADR_HIGH` received in track `t`
+ * Length: 4 bytes
