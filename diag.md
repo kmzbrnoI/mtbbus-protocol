@@ -42,7 +42,16 @@ There are some common DVs:
  * Length: specific for module type
  * Representation: specific for module type
 
-`14–31`: *not used*
+`16`: MTBbus number of successfully received messages
+ * Length: 4 bytes
+
+`17`: MTBbus number of received messages with invalid CRC
+ * Length: 4 bytes
+
+`18`: MTBbus number of sent messages
+ * Length: 4 bytes
+
+`19–31`: *not used*
 
 `32-255`: module-specific diagnostic values
 
