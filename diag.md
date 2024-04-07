@@ -8,9 +8,12 @@ meaning, e.g. 2 bytes for current MCU power supply voltage.
 
 There are some common DVs:
 
-`0`: version
+`0`: diagnostic values specification version
  * Length: 1 byte
- * Value: `0x10`
+ * Value: `0xJN`
+   - `J` = DV major version
+   - `N` = DV minor version
+   - Current version: *1.0* (`0x10`)
 
 `1`: module state
  * Length: 1 byte
