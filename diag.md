@@ -34,8 +34,9 @@ There are some common DVs:
 
 `11`: warnings
  * Length: any
- * Value: each bit represents one module warning type
- * Warnings are specific for module types
+ * Value: each bit represents one warning type
+ * First byte: *Common warnings vector*
+ * Next bytes: specific for module types
 
 `12`: CPU voltage
  * Length: specific for module type
@@ -58,9 +59,9 @@ There are some common DVs:
 
 `32-255`: module-specific diagnostic values
 
-## Common warning value
+## Common warnings vector
 
-Common warning contains only one byte: `0b00om0wbe`.
+Common warnings vector contain only one byte: `0b00om0wbe`.
 
 * `e`: Reset due to external signal.
 * `b`: Reset due to brown-out.
