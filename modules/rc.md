@@ -106,6 +106,12 @@ Module reports [common warnings](../diag.md) only.
 `45`: `APP_ID_ADR_HIGH` received
  * Length: 4 bytes
 
+`46`: ch1 address added/refreshed
+ * Length: 4 bytes
+
+`47`: ch2 address added/refreshed
+ * Length: 4 bytes
+
 
 `t` = track [0-7]
 
@@ -125,6 +131,12 @@ Module reports [common warnings](../diag.md) only.
  * Length: 4 bytes
 
 `55+10*t`: `APP_ID_ADR_HIGH` received in track `t`
+ * Length: 4 bytes
+
+`56+10*t`: ch1 address added/refreshed in track `t`
+ * Length: 4 bytes
+
+`57+10*t`: ch2 address added/refreshed in track `t`
  * Length: 4 bytes
 
 #### DCC
