@@ -55,7 +55,10 @@ There are some common DVs:
 `18`: MTBbus number of sent messages
  * Length: 4 bytes
 
-`19–31`: *not used*
+`19`: MTBbus number of unsent messages
+ * Length: 4 bytes
+
+`20–31`: *not used*
 
 `32-255`: module-specific diagnostic values
 
