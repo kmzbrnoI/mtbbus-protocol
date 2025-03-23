@@ -14,7 +14,7 @@ read address of a mobile decoder present on the track as well as decoder's CVs.
 ## Inputs
 
 For the purpose of this specification, DCC mobile decoder address is always
-a 13-bit number (0–16383, allowed values: xxxx TODO).
+a 13-bit number (0–16383).
 
 Inputs-state is a message composed of following 2-byte chunks. Each chunk contains
 one address of a present DCC decoder. Number of chunks depends on the number of
@@ -44,7 +44,7 @@ Master → slave:
 * *Get Input*: n.o. data bytes: 0.
 * *Set Output*: n.o. data bytes: 0.
 * *Firmware Write Flash*
-  - TODO
+  - Not yet supported
 
 Slave → master:
 
@@ -55,7 +55,7 @@ Slave → master:
 
 ### Firmware upgrade
 
-TODO
+Not yet supported.
 
 ## Diagnostic information
 
