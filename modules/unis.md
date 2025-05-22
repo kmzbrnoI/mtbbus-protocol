@@ -34,13 +34,14 @@ State of each output is encoded in 1 byte:
 
 ## Configuration
 
-Configuration consists of 55 bytes.
+Configuration consists of 61 bytes.
 
 1. 28 bytes of safe outputs state (outputs indexed in order 27 to 0).
 2. 8 bytes of input keep delay.
    - Byte 0: `0bBBBBAAAA`. `A` = delay of input 0, `B` = delay of input 1.
    - Byte 1: delay of input 2, delay of input 3.
    - ...
+
    Each input has 16 values of input delay. `0`=0.0s, `1`=0.1s, `2`=0.2s, ...,
    `15`=1.5s.
 3. 1 byte mask indicating which servo outputs are active
@@ -50,16 +51,25 @@ Configuration consists of 55 bytes.
    - 1 byte value for servo 1 position 2
    - 1 byte value for servo 2 position 1
    - ...
+
    Valid range is 0-255.
-   0 = servo pulse is 399 us.
-   255 = servo pulse 2613 us.
-   127 = servo pulse 1502 us (center position).
-   Recommended limits for pulse duration is 500 - 2500 us.
+   * 0 = servo pulse is 399 us.
+   * 255 = servo pulse 2613 us.
+   * 127 = servo pulse 1502 us (center position).
+   * Recommended limits for pulse duration is 500 - 2500 us.
 5. 6 bytes for servo speed
    - speed for servo 1
    - speed for servo 2
    - ...
    Speed 1 is slowest (1.56 positions/second). Speed 255 is fastest (797 positions/second).
+6. 6 bytes for servo first inputs (feedback sensors) mapping (*new since FW v2.0*)
+   - first feedback input for servo 1
+   - first feedback input for servo 2
+   - ...
+
+   Input=0 is reserved for *no feedback* (servo goes to position 1 after start).
+   Input=1 ~ feedback for first position is on input 0, for second position on input 1.
+   Input=15 ~ feedback for first position is on input 14, for second position on input 15.
 
 When input goes to logical 0, it must remain in this state for *input keep
 delay* to consider the input as logical 0. Only after the time input changed
