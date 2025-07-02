@@ -47,9 +47,9 @@ Configuration consists of 61 bytes.
 3. 1 byte mask indicating which servo outputs are active
    - `0b00654321`, 1 = output active, 0 = output disabled
 4. 12 bytes for servo positions
-   - 1 byte value for servo 1 position 1
-   - 1 byte value for servo 1 position 2
-   - 1 byte value for servo 2 position 1
+   - 1 byte value for servo 1 position A
+   - 1 byte value for servo 1 position B
+   - 1 byte value for servo 2 position A
    - ...
 
    Valid range is 0-255.
@@ -67,9 +67,9 @@ Configuration consists of 61 bytes.
    - first feedback input for servo 2
    - ...
 
-   Input=0 is reserved for *no feedback* (servo goes to position 1 after start).
-   Input=1 ~ feedback for first position is on input 0, for second position on input 1.
-   Input=15 ~ feedback for first position is on input 14, for second position on input 15.
+   Input=0 is reserved for *no feedback* (servo goes to position A after start).
+   Input=1 ~ feedback for position A is on input 0, for position B on input 1.
+   Input=15 ~ feedback for position A is on input 14, for position B on input 15.
 
 When input goes to logical 0, it must remain in this state for *input keep
 delay* to consider the input as logical 0. Only after the time input changed
@@ -108,11 +108,11 @@ Master → slave:
   - Data byte 0 = `0x01` = set servo position.
     - Data byte 1 = position identification `0b0000nnnp` where p = position, n = servo number
     - Data byte 2 = new position for servo (0-255)
-    (p = position  - 0=1st position, 1=2nd position, n = servo number - possible values 1-6)
+    (p = position  - 0=A position, 1=B position, n = servo number - possible values 1-6)
   - Data byte 0 = `0x02` = set servo speed.
     - Data byte 1 = position identification `0b0000nnnp` where p = position, n = servo number
     - Data byte 2: new speed for servo (valid range 1-255).
-    (p = position  - 0=1st position, 1=2nd position, n = servo number - possible values 1-6)
+    (p = position  - 0=A position, 1=B position, n = servo number - possible values 1-6)
   - Data byte 0 = `0x03` = manual servo positioning (changes will not be saved to eeprom).
     - Data byte 1 = position identification `0b0000nnnx` where n = servo number (1-6), x = ignored
     - Data byte 2: new position for servo (0-255).
