@@ -84,20 +84,15 @@ Master → slave:
 * *Get Input*: n.o. data bytes: 0.
 * *Set Output*: n.o. data bytes: variable.
   - State of all outputs is always sent.
-  - Data byte 0: full state mask for outputs `0bFEDCBA98`.
-  - Data byte 1: full state mask for outputs `0b76543210`.
-  - Data byte 2: binary state of outputs `0 0 0 0 s6p s6l s5p s5l`.
-  - Data byte 3: binary state of outputs `s4p s4l s3p s3l s2p s2l s1p s1l`.
-  - Data byte 4: binary state of outputs `0bFEDCBA98`.
-  - Data byte 5: binary state of outputs `0b76543210`.
-  - Data byte 6–n: state of full-state outputs in order 0–F.
-  - Examples (only data bytes are written):
-    - Set output 1 as active, other as inactive: `0x00 0x00 0x00 0x00 0x00 0x02`.
-    - Set output 8 to S-COM code `0x0A`, output 10 as flickering with period
-      2 Hz, output 15 as active, other as inactive:
-      `0x05 0x00 0x00 0x00 0x80 0x00 0x42 0x8A`.
-    - Set output 4,s1l,s2l active other inactive
-      `0x00 0x00 0x00 0x05 0x00 0x10`.
+  - Data byte 0: full state mask for outputs `0b76543210`.
+  - Data byte 1: full state mask for outputs `0bFEDCBA98`.
+  - Data byte 2: full state mask for outputs `s4p s4l s3p s3l s2p s2l s1p s1l`.
+  - Data byte 3: full state mask for outputs `0 0 0 0 s6p s6l s5p s5l`.
+  - Data byte 4: binary state of outputs `0b76543210`.
+  - Data byte 5: binary state of outputs `0bFEDCBA98`.
+  - Data byte 6: binary state of outputs `s4p s4l s3p s3l s2p s2l s1p s1l`.
+  - Data byte 7: binary state of outputs `0 0 0 0 s6p s6l s5p s5l`.
+  - Data byte 8–n: state of full-state outputs in order 0–F.
   - Bits in *binary state output* which are masked by *full state mask* can
     contain any value. This value is ignored.
 * *Firmware Write Flash*
