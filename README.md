@@ -25,6 +25,7 @@ must also be described. This protocol is available [here](pc).
    - [MTB-UNI](modules/uni.md)
    - [MTB-UNIS](modules/unis.md)
    - [MTB-RC](modules/rc.md)
+   - [MTB-LED](modules/led.md)
 
 ## Changelog
 
